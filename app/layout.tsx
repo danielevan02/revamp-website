@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Navbar from "@/components/Navbar";
-import { Inter } from 'next/font/google';
+import { Inter } from "next/font/google";
+import { CustomerServiceButton } from "@/components/CustomerServiceButton";
 
 const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
+  subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -21,12 +22,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.className} font-serif antialiased`}
-      >
+      <body className={`${inter.className} antialiased hide-scrollbar`}>
         <ThemeProvider defaultTheme="light">
-          <Navbar/>
+          <Navbar />
           {children}
+          <CustomerServiceButton/>
         </ThemeProvider>
       </body>
     </html>

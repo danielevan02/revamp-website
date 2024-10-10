@@ -27,23 +27,47 @@ export type Database = {
         }
         Relationships: []
       }
+      slider: {
+        Row: {
+          banner: string | null
+          created_at: string | null
+          id: number
+          image: string
+        }
+        Insert: {
+          banner?: string | null
+          created_at?: string | null
+          id?: number
+          image: string
+        }
+        Update: {
+          banner?: string | null
+          created_at?: string | null
+          id?: number
+          image?: string
+        }
+        Relationships: []
+      }
       sub_categories: {
         Row: {
           category_id: number
           created_at: string
           id: number
+          photo: string | null
           sub_name: string
         }
         Insert: {
           category_id: number
           created_at?: string
           id?: number
+          photo?: string | null
           sub_name: string
         }
         Update: {
           category_id?: number
           created_at?: string
           id?: number
+          photo?: string | null
           sub_name?: string
         }
         Relationships: [
