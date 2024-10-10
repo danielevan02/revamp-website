@@ -6,6 +6,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
+import { ContainerScroll } from "@/components/ui/ContainerScrollAnimation";
 
 export const revalidate = 0;
 
@@ -40,28 +41,41 @@ const Home = async () => {
           </a>
         </div>
       </BackgroundBeamsWithCollision>
-
-      <section className="w-full flex justify-center items-center py-10">
-        <Carousel className="max-w-6xl mx-10">
-          <CarouselContent className="w-full">
-            {slider?.map((item) => (
-              <CarouselItem key={item.id} className="w-full">
-                <Card className=" w-full overflow-hidden flex p-0 items-center justify-center object-cover">
-                  <Image
-                    src={item.image}
-                    width={1000}
-                    height={1000}
-                    alt={item.banner!}
-                    className="object-contain w-full"
-                  />
-                </Card>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
-      </section>
+ 
+      <ContainerScroll 
+        titleComponent={
+          <>
+            <h1 className="text-4xl font-semibold text-black dark:text-white">
+              Checkout our latest <br />
+              <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none">
+                Promo and Offers 
+              </span>
+            </h1>
+          </>
+        }
+      >
+        <section className="w-full flex justify-center items-center">
+          <Carousel className="max-w-full">
+            <CarouselContent className="w-full">
+              {slider?.map((item) => (
+                <CarouselItem key={item.id} className="w-full">
+                  <Card className=" w-full overflow-hidden flex p-0 items-center justify-center object-cover">
+                    <Image
+                      src={item.image}
+                      width={1000}
+                      height={1000}
+                      alt={item.banner!}
+                      className="object-cover w-full"
+                    />
+                  </Card>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </section>
+      </ContainerScroll>
 
       <section id="categories" className="mx-10">
         <h1 className="w-full text-center md:mt-28 mt-16 mb-10 md:text-5xl text-4xl font-thin">CATEGORIES</h1>
