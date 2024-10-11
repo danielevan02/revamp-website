@@ -30,13 +30,14 @@ export const Card = React.memo(
         fill
         className="object-cover absolute inset-0"
       />
+      <div className="absolute z-10 bg-black-200/50 w-full h-full"/>
       <div
         className={cn(
-          "absolute inset-0 bg-black/50 flex items-end py-8 px-4 transition-opacity duration-300",
-          hovered === index ? "opacity-100" : "opacity-0"
+          "absolute inset-0 bg-black/50 flex items-center justify-center text-center uppercase py-8 px-4 transition-all duration-300 z-20",
+          hovered === index ? "opacity-100 !font-extrabold" : "opacity-50 font-light"
         )}
       >
-        <div className="text-xl md:text-2xl font-medium bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-200">
+        <div className="text-xl md:text-2xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-200">
           {card.title}
         </div>
       </div>

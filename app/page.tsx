@@ -10,22 +10,23 @@ import { ContainerScroll } from "@/components/ui/ContainerScrollAnimation";
 import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
 import { IconCertificate, IconClock24, IconFreeRights, IconQrcode, IconReportMedical } from "@tabler/icons-react";
 import { Cover } from "@/components/ui/Cover";
+import { AuroraBackground } from "@/components/ui/AuroraBackground";
+import Awards from "@/components/Awards";
 
 export const revalidate = 0;
 
 const Home = async () => {
   const supabase = createClient();
-
   const { data: categories } = await supabase.from("sub_categories").select("sub_name, photo");
   const { data: slider } = await supabase.from("slider").select();
 
   const advantage = [
     {
       id: 1,
-      title: "Cooler Bag Tahan Dingin 24 Jam",
-      desc: "Kami menjamin cooler bag kami tahan 24 jam dalam menjaga suhu asi tetap dingin.",
-      header: "/advantage/a1.jpg",
-      icon: <IconClock24 className="h-4 w-4 text-neutral-500" />,
+      title: "Kantong asi QR Code pertama di dunia",
+      desc: "Produk kantong asi kami sudah dilengkapi dengan QR Code yang terintegrasi dengan aplikasi kami",
+      header: "/advantage/a4.png",
+      icon: <IconQrcode className="h-4 w-4 text-neutral-500" />,
       classname: "md:col-span-2",
     },
     {
@@ -46,10 +47,10 @@ const Home = async () => {
     },
     {
       id: 4,
-      title: "Kantong asi QR Code pertama di dunia",
-      desc: "Produk kantong asi kami sudah dilengkapi dengan QR Code yang terintegrasi dengan aplikasi kami",
-      header: "/advantage/a4.png",
-      icon: <IconQrcode className="h-4 w-4 text-neutral-500" />,
+      title: "Cooler Bag Tahan Dingin 24 Jam",
+      desc: "Kami menjamin cooler bag kami tahan 24 jam dalam menjaga suhu asi tetap dingin.",
+      header: "/advantage/a1.jpg",
+      icon: <IconClock24 className="h-4 w-4 text-neutral-500" />,
       classname: "md:col-span-1",
     },
     {
@@ -78,7 +79,7 @@ const Home = async () => {
           }}
         >
           <span className="text-white-200 uppercase">Competitive Quality and Innovative Solutions.</span>
-          <TextGenerateEffect words="Breastfeeding Lifestyle Solution" duration={0.8} />
+          <TextGenerateEffect words="Breastfeeding Lifestyle Solution By GabaG Indonesia" duration={0.8} />
           <a
             href="#promo"
             className="shadow-[inset_0_0_0_2px_#616467] backdrop-blur-sm text-white px-12 py-4 mt-10 rounded-full tracking-widest uppercase font-bold bg-transparent hover:bg-[#616467] hover:text-black-100 dark:text-neutral-200 transition duration-200"
@@ -89,38 +90,40 @@ const Home = async () => {
       </BackgroundBeamsWithCollision>
 
       <section id="promo">
-        <ContainerScroll
-          titleComponent={
-            <>
-              <h1 className="text-4xl font-semibold text-black dark:text-white">
-                Checkout our latest <br />
-                <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none">Promo and Offers 🔥</span>
-              </h1>
-            </>
-          }
-        >
-          <section id="promo" className="w-full flex justify-center items-center">
-            <Carousel className="max-w-full">
-              <CarouselContent className="w-full">
-                {slider?.map((item) => (
-                  <CarouselItem key={item.id} className="w-full">
-                    <Card className=" w-full overflow-hidden flex p-0 items-center justify-center object-cover">
-                      <Image
-                        src={item.image}
-                        width={1000}
-                        height={1000}
-                        alt={item.banner!}
-                        className="object-cover w-full"
-                      />
-                    </Card>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
-            </Carousel>
-          </section>
-        </ContainerScroll>
+        <AuroraBackground>
+          <ContainerScroll
+            titleComponent={
+              <>
+                <h1 className="text-4xl font-semibold text-black dark:text-white">
+                  Checkout our latest <br />
+                  <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none">Promo and Offers 🔥</span>
+                </h1>
+              </>
+            }
+          >
+            <section id="promo" className="w-full flex justify-center items-center">
+              <Carousel className="max-w-full">
+                <CarouselContent className="w-full">
+                  {slider?.map((item) => (
+                    <CarouselItem key={item.id} className="w-full">
+                      <Card className=" w-full overflow-hidden flex p-0 items-center justify-center object-cover">
+                        <Image
+                          src={item.image}
+                          width={1000}
+                          height={1000}
+                          alt={item.banner!}
+                          className="object-cover w-full"
+                        />
+                      </Card>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
+              </Carousel>
+            </section>
+          </ContainerScroll>
+        </AuroraBackground>
       </section>
 
       <section id="categories" className="mx-10">
@@ -135,6 +138,7 @@ const Home = async () => {
         <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem]">
           {advantage.map((item) => (
             <BentoGridItem
+              id={item.id}
               key={item.id}
               title={item.title}
               description={item.desc}
@@ -144,6 +148,13 @@ const Home = async () => {
             />
           ))}
         </BentoGrid>
+      </section>
+
+      <section
+        id="awards"
+        className="h-[40rem] mt-40 rounded-md flex flex-col antialiased dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden"
+      >
+        <Awards/>
       </section>
     </>
   );

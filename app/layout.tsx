@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased hide-scrollbar`}>
+      <body className={`${inter.className} antialiased hide-scrollbar bg-[#f9f9f9]`}>
         <ThemeProvider defaultTheme="light">
           <Navbar />
           {children}
