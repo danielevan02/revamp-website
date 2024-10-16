@@ -53,8 +53,8 @@ const Awards = () => {
         ease: [0.4, 0.0, 0.2, 1],
       }}
     >
-      <h1 className="text-5xl font-extrabold uppercase text-center mb-10">
-        Our <Highlight className="text-black dark:text-white">Awards</Highlight>
+      <h1 className="section-title">
+        Our <Highlight className="text-black-200 dark:text-white">Awards</Highlight>
       </h1>
       <InfiniteMovingCards direction="right" speed="slow" items={award} />
     </motion.div>

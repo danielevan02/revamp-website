@@ -3,7 +3,7 @@ import { IconBrandWhatsapp } from "@tabler/icons-react";
 
 export function CustomerServiceButton() {
   return (
-    <a href="https://api.whatsapp.com/send/?phone=628118242224&text&type=phone_number&app_absent=0" className="fixed bottom-10 right-10">
+    <a href="https://api.whatsapp.com/send/?phone=628118242224&text&type=phone_number&app_absent=0" className="fixed bottom-10 right-10 z-30">
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>

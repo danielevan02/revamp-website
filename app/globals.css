@@ -2,13 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
 *{
-  font-family: 'Inter', sans-serif;
   scroll-behavior: smooth;
 }
 
+.section-title{
+  @apply text-4xl md:text-7xl font-extrabold text-center text-black-200 pt-20 pb-11
+}
 
 ::-webkit-scrollbar {
   display: none;

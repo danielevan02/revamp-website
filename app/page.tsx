@@ -12,6 +12,10 @@ import { IconCertificate, IconClock24, IconFreeRights, IconQrcode, IconReportMed
 import { Cover } from "@/components/ui/Cover";
 import { AuroraBackground } from "@/components/ui/AuroraBackground";
 import Awards from "@/components/Awards";
+import { CommunityCard } from "@/components/CommunityCard";
+import { TextHoverEffect } from "@/components/ui/TextHoverEffect";
+import { StickyScroll } from "@/components/ui/StickyScrollReveal";
+import { FooterBanner } from "@/components/FooterBanner";
 
 export const revalidate = 0;
 
@@ -62,6 +66,112 @@ const Home = async () => {
       classname: "md:col-span-1",
     },
   ];
+
+  const content = [
+    {
+      name: "kuyorderkuy",
+      photo: '/testimony/c1.jpg',
+      description:
+        "moisturizing yg bagus banget karna didalamnya terdapat sunscreen dan uc protection jg, packing sangat aman lembut mudah menyerap dan tidak lengket wajib beli sii ini apa lg busui bumil yg lagi cari skincare yg aman wajib pny ini next bakalan order lagi😍",
+      content: (
+        <div className="h-full w-full  flex items-center justify-center text-white">
+          <Image
+            src="/testimony/t1.jpg"
+            width={1000}
+            height={1000}
+            className="h-full w-full object-cover"
+            alt="linear board demo"
+          />
+        </div>
+      ),
+    },
+    {
+      name: "diahambarwati12",
+      photo: '/testimony/c2.jpg',
+      description:
+        "Ga diragukan lagi sih kalo sama produk GABAG, suka semuanya. Motifnya lucu-lucu, kantong ASInya juga kuat & ga mudah bocor. Langganan akuuu 👍🏻",
+      content: (
+        <div className="h-full w-full  flex items-center justify-center text-white">
+          <Image
+            src="/testimony/t2.jpg"
+            width={1000}
+            height={1000}
+            className="h-full w-full object-cover"
+            alt="linear board demo"
+          />
+        </div>
+      ),
+    },
+    {
+      name: "V****9",
+      photo: '/testimony/c3.jpg',
+      description:
+        "tas asi selalu jadi andalan kado saat ada temen kantor yang lahiran hahahaha, dan selalu belinya gabag, nggak merk lain 🥹 karena gabag emang sebagus ituuu",
+      content: (
+        <div className="h-full w-full  flex items-center justify-center text-white">
+          <Image
+            src="/testimony/t3.jpg"
+            width={1000}
+            height={1000}
+            className="h-full w-full object-cover"
+            alt="linear board demo"
+          />
+        </div>
+      ),
+    },
+    {
+      name: "Anggita",
+      photo: '/testimony/c4.jpg',
+      description:
+        "Tasnya besar, muat banyak, ada tas kuning untuk simpan tas agar tidak kotor. Rekomendasi bgt untuk busui yang kerja. Tali bisa menyamping dan bisa dibuat tas punggung.",
+      content: (
+        <div className="h-full w-full  flex items-center justify-center text-white">
+          <Image
+            src="/testimony/t4.jpg"
+            width={1000}
+            height={1000}
+            className="h-full w-full object-cover"
+            alt="linear board demo"
+          />
+        </div>
+      ),
+    },
+    {
+      name: "d*****l",
+      photo: '/testimony/c5.jpg',
+      description:
+        "Saya pertama beli 1, setelah pakai cocok ga sakit dan nyaman digunakan. Suara juga silent. Ga mengganggu. Krn ccok saya beli 1 lg. uda coba merk Sp… dan Mom… . Ttlnya ada 4. Yg ini the best menurut saya",
+      content: (
+        <div className="h-full w-full  flex items-center justify-center text-white">
+          <Image
+            src="/testimony/t5.jpg"
+            width={1000}
+            height={1000}
+            className="h-full w-full object-cover"
+            alt="linear board demo"
+          />
+        </div>
+      ),
+    },
+    {
+      name: "e***l",
+      photo: '/testimony/c6.jpg',
+      description:
+        "Dari semua tas ASI, ini yg paling recomended. Kalau lagi jalan ke mall, memang enak klo tas sandang punggung belakang. Praktis. Nyesal gak beli dari awal.",
+      content: (
+        <div className="h-full w-full  flex items-center justify-center text-white">
+          <Image
+            src="/testimony/t6.jpg"
+            width={1000}
+            height={1000}
+            className="h-full w-full object-cover"
+            alt="linear board demo"
+          />
+        </div>
+      ),
+    },
+  ];
+
   const category =
     categories?.map((data) => {
       return {
@@ -127,11 +237,11 @@ const Home = async () => {
       </section>
 
       <section id="categories" className="mx-10">
-        <h1 className="w-full text-center md:mt-28 mt-16 mb-10 md:text-5xl text-4xl font-thin">CATEGORIES</h1>
+        <h1 className="section-title">CATEGORIES</h1>
         <FocusCards cards={category} />
       </section>
 
-      <section id="advantage" className="pt-20">
+      <section id="advantage" className="pt-20 mx-10 md:mx-0">
         <h1 className="text-4xl pb-20 md:text-4xl lg:text-6xl font-bold max-w-7xl mx-auto text-center mt-6 relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
           Kenapa memilih produk <br /> <Cover>Gabag Indonesia</Cover> ?
         </h1>
@@ -154,8 +264,24 @@ const Home = async () => {
         id="awards"
         className="h-[40rem] mt-40 rounded-md flex flex-col antialiased dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden"
       >
-        <Awards/>
+        <Awards />
       </section>
+
+      <section id="community" className="text-center text-black-200">
+        <h1 className="section-title">Join Our Community</h1>
+        <span className="md:text-xl">Kami memahami kebutuhan Mama untuk mendapatkan produk berkualitas</span>
+        <CommunityCard />
+      </section>
+
+      <section id="testimoni" className="py-72">
+        <TextHoverEffect text="Our Testimony"/>
+        <StickyScroll content={content}/>
+      </section>
+
+      <FooterBanner/>
+      <footer className="bg-slate-900">
+        ddsd
+      </footer>
     </>
   );
 };
