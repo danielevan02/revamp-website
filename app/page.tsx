@@ -8,7 +8,16 @@ import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { ContainerScroll } from "@/components/ui/ContainerScrollAnimation";
 import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
-import { IconCertificate, IconClock24, IconFreeRights, IconQrcode, IconReportMedical } from "@tabler/icons-react";
+import {
+  IconBrandFacebookFilled,
+  IconBrandInstagram,
+  IconBrandYoutubeFilled,
+  IconCertificate,
+  IconClock24,
+  IconFreeRights,
+  IconQrcode,
+  IconReportMedical,
+} from "@tabler/icons-react";
 import { Cover } from "@/components/ui/Cover";
 import { AuroraBackground } from "@/components/ui/AuroraBackground";
 import Awards from "@/components/Awards";
@@ -70,7 +79,7 @@ const Home = async () => {
   const content = [
     {
       name: "kuyorderkuy",
-      photo: '/testimony/c1.jpg',
+      photo: "/testimony/c1.jpg",
       description:
         "moisturizing yg bagus banget karna didalamnya terdapat sunscreen dan uc protection jg, packing sangat aman lembut mudah menyerap dan tidak lengket wajib beli sii ini apa lg busui bumil yg lagi cari skincare yg aman wajib pny ini next bakalan order lagi😍",
       content: (
@@ -87,7 +96,7 @@ const Home = async () => {
     },
     {
       name: "diahambarwati12",
-      photo: '/testimony/c2.jpg',
+      photo: "/testimony/c2.jpg",
       description:
         "Ga diragukan lagi sih kalo sama produk GABAG, suka semuanya. Motifnya lucu-lucu, kantong ASInya juga kuat & ga mudah bocor. Langganan akuuu 👍🏻",
       content: (
@@ -104,7 +113,7 @@ const Home = async () => {
     },
     {
       name: "V****9",
-      photo: '/testimony/c3.jpg',
+      photo: "/testimony/c3.jpg",
       description:
         "tas asi selalu jadi andalan kado saat ada temen kantor yang lahiran hahahaha, dan selalu belinya gabag, nggak merk lain 🥹 karena gabag emang sebagus ituuu",
       content: (
@@ -121,7 +130,7 @@ const Home = async () => {
     },
     {
       name: "Anggita",
-      photo: '/testimony/c4.jpg',
+      photo: "/testimony/c4.jpg",
       description:
         "Tasnya besar, muat banyak, ada tas kuning untuk simpan tas agar tidak kotor. Rekomendasi bgt untuk busui yang kerja. Tali bisa menyamping dan bisa dibuat tas punggung.",
       content: (
@@ -138,7 +147,7 @@ const Home = async () => {
     },
     {
       name: "d*****l",
-      photo: '/testimony/c5.jpg',
+      photo: "/testimony/c5.jpg",
       description:
         "Saya pertama beli 1, setelah pakai cocok ga sakit dan nyaman digunakan. Suara juga silent. Ga mengganggu. Krn ccok saya beli 1 lg. uda coba merk Sp… dan Mom… . Ttlnya ada 4. Yg ini the best menurut saya",
       content: (
@@ -155,7 +164,7 @@ const Home = async () => {
     },
     {
       name: "e***l",
-      photo: '/testimony/c6.jpg',
+      photo: "/testimony/c6.jpg",
       description:
         "Dari semua tas ASI, ini yg paling recomended. Kalau lagi jalan ke mall, memang enak klo tas sandang punggung belakang. Praktis. Nyesal gak beli dari awal.",
       content: (
@@ -169,6 +178,35 @@ const Home = async () => {
           />
         </div>
       ),
+    },
+  ];
+
+  const socialMedia = [
+    {
+      name: 'facebook',
+      icon: <IconBrandFacebookFilled />,
+      link: "https://www.facebook.com/Gabag.Indonesia",
+    },
+    {
+      name: 'instagram',
+      icon: <IconBrandInstagram />,
+      link: "https://www.instagram.com/gabagindonesia/",
+    },
+    {
+      name: 'youtube',
+      icon: <IconBrandYoutubeFilled />,
+      link: "https://www.youtube.com/channel/UC2hMxlkIvWYfq-jBhHd2y0Q",
+    },
+  ];
+
+  const detailMenu = [
+    {
+      title: "About Us",
+      menu: ["Warranty", "Blog", "Event & Campaign", "Contact Us", "Career", "Gallery", "Join Reseller", "About Gabag"],
+    },
+    {
+      title: "Customer Service",
+      menu: ["Customer Order", "Track Shipment", "About Gabag Coin"],
     },
   ];
 
@@ -274,13 +312,56 @@ const Home = async () => {
       </section>
 
       <section id="testimoni" className="py-72">
-        <TextHoverEffect text="Our Testimony"/>
-        <StickyScroll content={content}/>
+        <TextHoverEffect text="Our Testimony" />
+        <StickyScroll content={content} />
       </section>
 
-      <FooterBanner/>
-      <footer className="bg-slate-900">
-        ddsd
+      <FooterBanner />
+      <footer className="bg-slate-900 p-10 relative">
+        <div className="flex gap-5 justify-evenly">
+          <div className="logo-content flex flex-col gap-10">
+            <Image src="/logo-footer.png" width={1000} height={1000} alt="logo" className="w-52 h-36 object-cover" />
+            <div className="flex flex-col text-white-200 text-center">
+              <span>Our Contact:</span>
+              <span>+62 811-8242-224</span>
+            </div>
+            <div className="social-media flex justify-center gap-2">
+              {socialMedia.map((item, i) => (
+                <a 
+                  href={item.link} 
+                  key={i} 
+                  className={`rounded-full bg-white-200 p-2 transition-all duration-200 hover:text-white
+                    ${item.name === 'youtube' ? 'hover:bg-red-600' : 
+                      item.name === 'instagram' ? 'hover:bg-pink-500' :
+                      'hover:bg-blue-600'
+                    }
+                  `}
+                >
+                  {item.icon}
+                </a>
+              ))}
+            </div>
+          </div>
+          <div className="flex justify-between gap-20">
+            {detailMenu.map((item, i) => (
+              <div key={i} className="text-white-200">
+                <h1 className="text-xl font-bold">{item.title}</h1>
+                <ul>
+                  {item.menu.map((menu, i) => (
+                    <li key={i}>
+
+                      {menu}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <div className="flex flex-col">
+            
+          </div>
+        </div>
+        <span className="absolute bottom-1 left-1/2 z-10 text-white-200 -translate-x-1/2">Copyright&copy;2024 Daniel Evan </span>
       </footer>
     </>
   );
