@@ -9,9 +9,6 @@ import Image from "next/image";
 import { ContainerScroll } from "@/components/ui/ContainerScrollAnimation";
 import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
 import {
-  IconBrandFacebookFilled,
-  IconBrandInstagram,
-  IconBrandYoutubeFilled,
   IconCertificate,
   IconClock24,
   IconFreeRights,
@@ -25,8 +22,9 @@ import { CommunityCard } from "@/components/CommunityCard";
 import { TextHoverEffect } from "@/components/ui/TextHoverEffect";
 import { StickyScroll } from "@/components/ui/StickyScrollReveal";
 import { FooterBanner } from "@/components/FooterBanner";
+import Link from "next/link";
 
-export const revalidate = 0;
+export const revalidate = 1;
 
 const Home = async () => {
   const supabase = createClient();
@@ -181,35 +179,6 @@ const Home = async () => {
     },
   ];
 
-  const socialMedia = [
-    {
-      name: 'facebook',
-      icon: <IconBrandFacebookFilled />,
-      link: "https://www.facebook.com/Gabag.Indonesia",
-    },
-    {
-      name: 'instagram',
-      icon: <IconBrandInstagram />,
-      link: "https://www.instagram.com/gabagindonesia/",
-    },
-    {
-      name: 'youtube',
-      icon: <IconBrandYoutubeFilled />,
-      link: "https://www.youtube.com/channel/UC2hMxlkIvWYfq-jBhHd2y0Q",
-    },
-  ];
-
-  const detailMenu = [
-    {
-      title: "About Us",
-      menu: ["Warranty", "Blog", "Event & Campaign", "Contact Us", "Career", "Gallery", "Join Reseller", "About Gabag"],
-    },
-    {
-      title: "Customer Service",
-      menu: ["Customer Order", "Track Shipment", "About Gabag Coin"],
-    },
-  ];
-
   const category =
     categories?.map((data) => {
       return {
@@ -228,12 +197,12 @@ const Home = async () => {
         >
           <span className="text-white-200 uppercase">Competitive Quality and Innovative Solutions.</span>
           <TextGenerateEffect words="Breastfeeding Lifestyle Solution By GabaG Indonesia" duration={0.8} />
-          <a
-            href="#promo"
+          <Link
+            href="/product"
             className="shadow-[inset_0_0_0_2px_#616467] backdrop-blur-sm text-white px-12 py-4 mt-10 rounded-full tracking-widest uppercase font-bold bg-transparent hover:bg-[#616467] hover:text-black-100 dark:text-neutral-200 transition duration-200"
           >
-            Explore
-          </a>
+            checkout our product
+          </Link>
         </div>
       </BackgroundBeamsWithCollision>
 
@@ -317,52 +286,7 @@ const Home = async () => {
       </section>
 
       <FooterBanner />
-      <footer className="bg-slate-900 p-10 relative">
-        <div className="flex gap-5 justify-evenly">
-          <div className="logo-content flex flex-col gap-10">
-            <Image src="/logo-footer.png" width={1000} height={1000} alt="logo" className="w-52 h-36 object-cover" />
-            <div className="flex flex-col text-white-200 text-center">
-              <span>Our Contact:</span>
-              <span>+62 811-8242-224</span>
-            </div>
-            <div className="social-media flex justify-center gap-2">
-              {socialMedia.map((item, i) => (
-                <a 
-                  href={item.link} 
-                  key={i} 
-                  className={`rounded-full bg-white-200 p-2 transition-all duration-200 hover:text-white
-                    ${item.name === 'youtube' ? 'hover:bg-red-600' : 
-                      item.name === 'instagram' ? 'hover:bg-pink-500' :
-                      'hover:bg-blue-600'
-                    }
-                  `}
-                >
-                  {item.icon}
-                </a>
-              ))}
-            </div>
-          </div>
-          <div className="flex justify-between gap-20">
-            {detailMenu.map((item, i) => (
-              <div key={i} className="text-white-200">
-                <h1 className="text-xl font-bold">{item.title}</h1>
-                <ul>
-                  {item.menu.map((menu, i) => (
-                    <li key={i}>
-
-                      {menu}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-          <div className="flex flex-col">
-            
-          </div>
-        </div>
-        <span className="absolute bottom-1 left-1/2 z-10 text-white-200 -translate-x-1/2">Copyright&copy;2024 Daniel Evan </span>
-      </footer>
+      
     </>
   );
 };

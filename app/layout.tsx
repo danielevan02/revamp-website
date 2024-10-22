@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Navbar from "@/components/Navbar";
-import { Inter } from "next/font/google";
+import { Outfit } from "next/font/google";
 import { CustomerServiceButton } from "@/components/CustomerServiceButton";
-
-const inter = Inter({
+import FooterContent from "@/components/FooterContent";
+const inter = Outfit({
   subsets: ["latin"],
 });
 
@@ -25,7 +25,8 @@ export default function RootLayout({
         <ThemeProvider defaultTheme="light">
           <Navbar />
           {children}
-          <CustomerServiceButton/>
+          <CustomerServiceButton />
+          <FooterContent />
         </ThemeProvider>
       </body>
     </html>

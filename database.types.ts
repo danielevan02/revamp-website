@@ -27,6 +27,47 @@ export type Database = {
         }
         Relationships: []
       }
+      product: {
+        Row: {
+          category_id: number | null
+          created_at: string
+          desc: string | null
+          id: number
+          photo: string[]
+          price: number
+          product_name: string
+          qty: number
+        }
+        Insert: {
+          category_id?: number | null
+          created_at?: string
+          desc?: string | null
+          id?: number
+          photo: string[]
+          price: number
+          product_name: string
+          qty: number
+        }
+        Update: {
+          category_id?: number | null
+          created_at?: string
+          desc?: string | null
+          id?: number
+          photo?: string[]
+          price?: number
+          product_name?: string
+          qty?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "sub_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       slider: {
         Row: {
           banner: string | null
@@ -76,6 +117,44 @@ export type Database = {
             columns: ["category_id"]
             isOneToOne: false
             referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      variant: {
+        Row: {
+          created_at: string
+          id: number
+          price: number
+          product_id: number
+          var_photo: string | null
+          var_stock: number
+          variant_name: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          price: number
+          product_id: number
+          var_photo?: string | null
+          var_stock: number
+          variant_name: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          price?: number
+          product_id?: number
+          var_photo?: string | null
+          var_stock?: number
+          variant_name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "variant_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "product"
             referencedColumns: ["id"]
           },
         ]
@@ -176,4 +255,19 @@ export type Enums<
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"]
     ? PublicSchema["Enums"][PublicEnumNameOrOptions]
+    : never
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends
+    | keyof PublicSchema["CompositeTypes"]
+    | { schema: keyof Database },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof Database
+  }
+    ? keyof Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    : never = never,
+> = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
+  ? Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof PublicSchema["CompositeTypes"]
+    ? PublicSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
     : never
