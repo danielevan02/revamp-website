@@ -1,13 +1,11 @@
 import { create } from 'zustand'
 
-type NavbarHeight = {
-  height: number
-  setHeight: (height: number) => void
+type Modal = {
+  isOpen: boolean
+  close: (newState:boolean) => void 
 }
 
-export const useHeight = create<NavbarHeight>((set) => ({
-  height: 0,
-  setHeight: (newHeight: number) => set(
-    {height: newHeight}
-  )
+export const useModalState = create<Modal>((set) => ({
+  isOpen: false,
+  close: (newState) => set({isOpen: newState})
 }))

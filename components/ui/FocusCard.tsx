@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { animate, inView, motion, stagger } from "framer-motion";
 
 export const Card = React.memo(
   ({
@@ -16,13 +17,17 @@ export const Card = React.memo(
     hovered: number | null;
     setHovered: React.Dispatch<React.SetStateAction<number | null>>;
   }) => (
-    <div
+    <motion.div
       onMouseEnter={() => setHovered(index)}
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        "rounded-lg relative bg-gray-100 dark:bg-neutral-900 overflow-hidden h-60 md:h-96 min-w-80 transition-all duration-300 ease-out snap-start",
+        "card rounded-lg relative bg-gray-100 dark:bg-neutral-900 overflow-hidden h-60 md:h-96 min-w-80 transition-all duration-300 ease-out snap-start",
         hovered !== null && hovered !== index && "blur-sm scale-[0.98]"
       )}
+      style={{
+        y: 50,
+        opacity: 0,
+      }}
     >
       <Image
         src={card.src}
@@ -37,11 +42,11 @@ export const Card = React.memo(
           hovered === index ? "opacity-100 !font-extrabold" : "opacity-50 font-light"
         )}
       >
-        <div className="text-xl md:text-2xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-200">
+        <div className="text-xl md:text-2xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-200 px-2">
           {card.title}
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 );
 
@@ -55,8 +60,18 @@ type Card = {
 export function FocusCards({ cards }: { cards: Card[] }) {
   const [hovered, setHovered] = useState<number | null>(null);
 
+  useEffect(()=>{
+    inView(".cardContainer", () => {
+      animate(
+        ".card", 
+        {opacity: 1, y: 0}, 
+        {delay: stagger(0.1), duration: 0.5}
+      )
+    })
+  }, [])
+
   return (
-    <div className="flex gap-2 hide-scrollbar overflow-scroll w-full snap-x">
+    <motion.div className="cardContainer flex gap-2 hide-scrollbar overflow-scroll w-full snap-x">
       {cards.map((card, index) => (
         <Card
           key={card.title}
@@ -66,6 +81,6 @@ export function FocusCards({ cards }: { cards: Card[] }) {
           setHovered={setHovered}
         />
       ))}
-    </div>
+    </motion.div>
   );
 }

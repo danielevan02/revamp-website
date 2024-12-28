@@ -46,12 +46,12 @@ const Awards = () => {
       }}
       whileInView={{
         opacity: 1,
-        y: [20, -5, 0],
+        y: 0,
       }}
       transition={{
         duration: 1,
-        ease: [0.4, 0.0, 0.2, 1],
       }}
+      viewport={{once: true}}
     >
       <h1 className="section-title">
         Our <Highlight className="text-black-200 dark:text-white">Awards</Highlight>

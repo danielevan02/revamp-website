@@ -97,7 +97,7 @@ export const InfiniteMovingCards = ({
                 aria-hidden="true"
                 className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
               ></div>
-              <div className="relative z-20 text-gray-100 font-normal flex justify-center items-center">
+              <div className="relative z-20 text-gray-100 font-normal flex flex-col justify-between items-center">
                 <Image
                   src={item.photo}
                   width={1000}
@@ -105,16 +105,16 @@ export const InfiniteMovingCards = ({
                   alt={item.title}
                   className="w-40 h-40 object-contain"
                 />
-              </div>
-              <div className="relative z-20 mt-6 flex flex-row items-center">
-                <span className="flex flex-col gap-1">
-                  <span className=" text-sm leading-[1.6] text-gray-400 font-normal">
-                    {item.desc}
+                <div className="relative z-20 mt-6 flex flex-row items-center">
+                  <span className="flex flex-col gap-1">
+                    <span className=" text-sm leading-[1.6] text-gray-400 font-normal">
+                      {item.desc}
+                    </span>
+                    <span className=" text-sm leading-[1.6] text-gray-400 font-extrabold">
+                      {item.title}
+                    </span>
                   </span>
-                  <span className=" text-sm leading-[1.6] text-gray-400 font-extrabold">
-                    {item.title}
-                  </span>
-                </span>
+                </div>
               </div>
             </blockquote>
           </li>

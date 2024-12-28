@@ -76,7 +76,7 @@ export default function Navbar() {
     <AnimatePresence>
       {(isVisible || !isLandingPage) && (
         <motion.nav
-          className={`${isLandingPage ? 'fixed':'sticky'} top-0 left-0 right-0  bg-white md:bg-white/90 shadow-md z-50 backdrop-blur-sm`}
+          className={`${isLandingPage ? 'fixed':'sticky'} top-0 left-0 right-0  bg-white md:bg-white/90 shadow-md z-[99] backdrop-blur-sm`}
           initial={isLandingPage ? { y: "-100%" } : { y: 0 }}
           animate={{ y: 0 }}
           exit={isLandingPage ? { y: "-100%" } : {}}
