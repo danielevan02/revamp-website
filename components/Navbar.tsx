@@ -6,24 +6,30 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
+import { ClassNameValue } from "tailwind-merge";
+import { cn } from "@/lib/utils";
 
 const menuItems = [
+  { name: "Products", href: "/product" },
   { name: "Blog", href: "/blog" },
-  { name: "Event & Campaign", href: "/events" },
-  { name: "Join Reseller", href: "/reseller" },
   { name: "Gallery", href: "/gallery" },
   { name: "About Gabag", href: "/about" },
 ];
 
-const LoginButton = ({ className = "" }) => (
-  <button className={`px-6 py-2 rounded-xl border flex justify-center items-center font-semibold border-black bg-white text-black text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200 ${className}`}>
+const LoginButton = ({className}: {className?: ClassNameValue}) => (
+  <button
+    className={`px-6 py-2 rounded-xl border flex justify-center items-center font-semibold border-black bg-white text-black text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200 ${className}`}
+  >
     Login
   </button>
 );
 
-const SignInButton = ({ className = "" }) => (
-  <button className={`inline-flex py-2 px-5 animate-shimmer items-center justify-center rounded-xl border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 ${className}`}>
-    Sign In
+const SignInButton = ({className}: {className?: ClassNameValue}) => (
+  <button className={cn("p-[3px] relative", className)}>
+    <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-xl" />
+    <div className="px-5 py-2  bg-black rounded-lg relative group transition duration-200 text-white hover:bg-transparent">
+      Sign Up
+    </div>
   </button>
 );
 
@@ -33,6 +39,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const isLandingPage = useMemo(() => pathname === "/", [pathname]);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const path = usePathname()
 
   const handleScroll = useCallback(() => {
     const scrollPosition = window.scrollY;
@@ -76,7 +83,9 @@ export default function Navbar() {
     <AnimatePresence>
       {(isVisible || !isLandingPage) && (
         <motion.nav
-          className={`${isLandingPage ? 'fixed':'sticky'} top-0 left-0 right-0  bg-white md:bg-white/90 shadow-md z-[99] backdrop-blur-sm`}
+          className={`${
+            isLandingPage ? "fixed" : "sticky"
+          } top-0 left-0 right-0  bg-white md:bg-white/90 shadow-md z-[99] backdrop-blur-sm`}
           initial={isLandingPage ? { y: "-100%" } : { y: 0 }}
           animate={{ y: 0 }}
           exit={isLandingPage ? { y: "-100%" } : {}}
@@ -90,12 +99,14 @@ export default function Navbar() {
                   <Image src="/logo.png" alt="Gabag logo" width={1000} height={1000} className="w-full h-full" />
                 </Link>
               </div>
-              <div className="hidden sm:ml-6 md:flex sm:space-x-8 items-center">
+              <div className="hidden sm:ml-6 lg:flex sm:space-x-8 items-center">
                 {menuItems.map((item) => (
                   <motion.div key={item.name} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                     <Link
                       href={item.href}
-                      className="text-gray-600 hover:text-primary px-3 py-2 rounded-md text-sm font-medium"
+                      className={cn('text-gray-600 hover:text-primary px-3 py-2 uppercase text-sm rounded-md',
+                        item.href === path ? 'font-extrabold' : 'font-medium'
+                      )}
                       aria-current={pathname === item.href ? "page" : undefined}
                     >
                       {item.name}
@@ -103,11 +114,11 @@ export default function Navbar() {
                   </motion.div>
                 ))}
               </div>
-              <div className="hidden md:flex sm:items-center gap-3">
+              <div className="hidden lg:flex sm:items-center gap-3">
                 <LoginButton />
                 <SignInButton />
               </div>
-              <div className="-mr-2 flex items-center md:hidden">
+              <div className="-mr-2 flex items-center lg:hidden">
                 <button
                   onClick={() => setIsOpen(!isOpen)}
                   className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
@@ -124,7 +135,7 @@ export default function Navbar() {
             {isOpen && (
               <motion.div
                 ref={mobileMenuRef}
-                className="md:hidden"
+                className="lg:hidden"
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}

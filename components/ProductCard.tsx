@@ -15,6 +15,7 @@ const ProductCard: React.FC<FullProductType> = ({name, categories, photo, varian
   useEffect(()=>{
     animate(".productCard", {opacity: 1, y: 0}, {delay: stagger(0.1), duration: 0.2})
   }, [])
+
   return (
     <motion.div 
       className="productCard col-span-1 relative w-full h-[30rem] flex flex-col bg-white p-5 border rounded-lg group/product gap-5 transition-all duration-200 hover:shadow-lg"
@@ -31,13 +32,13 @@ const ProductCard: React.FC<FullProductType> = ({name, categories, photo, varian
         <h1 className="font-light capitalize">{categories[0].name}</h1>
         <h1 className="font-bold line-clamp-1 mb-5 capitalize">{name}</h1>
         {price || (maxPrice===minPrice)
-          ? <span className="text-xl font-extrabold">Rp{[price ?? maxPrice].toLocaleString()}</span>
-          : <span className="text-xl font-extrabold">Rp{minPrice.toLocaleString()} - Rp{maxPrice.toLocaleString()}</span>
+          ? <span className="text-sm md:text-lg font-extrabold">Rp{[price ?? maxPrice].toLocaleString()}</span>
+          : <span className="text-sm md:text-base xl:text-lg font-extrabold w-32 xl:w-full">Rp{minPrice.toLocaleString()} - Rp{maxPrice.toLocaleString()}</span>
         }
       </div>
-      <Link href={`/product/${id}`} className="flex items-center justify-center gap-1 absolute bottom-2 right-2 border text-green-600 bg-green-200 rounded-full py-2 px-4 transition-all duration-200 hover:shadow-sm hover:shadow-green-400">
-        <IconShoppingCart/>
-        <span className="font-bold">Buy</span>
+      <Link href={`/product/${id}`} className="flex items-center justify-center gap-1 absolute bottom-2 right-2 border text-green-600 bg-green-200 rounded-full py-2  px-2 lg:px-4 transition-all duration-200 hover:shadow-sm hover:shadow-green-400">
+        <IconShoppingCart size={15}/>
+        <span className="font-bold hidden lg:flex text-sm">Buy</span>
       </Link>
     </motion.div>
   );

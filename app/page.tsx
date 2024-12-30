@@ -1,7 +1,6 @@
 import { BackgroundBeamsWithCollision } from "@/components/ui/BackgroundBeamsWithCollision";
 import { FocusCards } from "@/components/ui/FocusCard";
 import { TextGenerateEffect } from "@/components/ui/TextGenerateEffect";
-import { Carousel, CarouselContent, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import React from "react";
 import { ContainerScroll } from "@/components/ui/ContainerScrollAnimation";
 import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
@@ -15,11 +14,14 @@ import Link from "next/link";
 import {getAllCategories} from "./action/product.action.ts/productAction";
 import { advantage, content } from "@/lib/content";
 import { AnimatedTestimonials } from "@/components/ui/AnimatedTestimonials";
+import { getAllBanners } from "./action/product.action.ts/bannerAction";
+import HomeSliderBanner from "@/components/HomeSliderBanner";
 
 export const revalidate = 1;
 
 const Home = async () => {
   const categories = await getAllCategories()
+  const banners = await getAllBanners()
 
   const category =
     categories?.map((data) => {
@@ -42,9 +44,9 @@ const Home = async () => {
           <TextGenerateEffect words="Breastfeeding Lifestyle Solution By GabaG Indonesia" duration={0.8} />
           <Link
             href="/product"
-            className="shadow-[inset_0_0_0_2px_#616467] backdrop-blur-sm text-white px-12 py-4 mt-10 rounded-full tracking-widest uppercase font-bold bg-transparent hover:bg-[#616467] hover:text-black-100 dark:text-neutral-200 transition duration-200"
+            className="shadow-[inset_0_0_0_2px_#616467] backdrop-blur-lg text-white px-12 py-4 mt-10 rounded-full tracking-widest uppercase font-bold bg-transparent hover:bg-[#616467] hover:text-black-100 dark:text-neutral-200 transition duration-200 text-2xl"
           >
-            checkout our product
+            browse our product collections
           </Link>
         </div>
       </BackgroundBeamsWithCollision>
@@ -62,25 +64,7 @@ const Home = async () => {
             }
           >
             <section id="promo" className="w-full flex justify-center items-center">
-              <Carousel className="max-w-full">
-                <CarouselContent className="w-full">
-                  {/* {slider?.map((item) => (
-                    <CarouselItem key={item.id} className="w-full">
-                      <Card className=" w-full overflow-hidden flex p-0 items-center justify-center object-cover">
-                        <Image
-                          src={item.image}
-                          width={1000}
-                          height={1000}
-                          alt={item.banner!}
-                          className="object-cover w-full"
-                        />
-                      </Card>
-                    </CarouselItem>
-                  ))} */}
-                </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
-              </Carousel>
+              <HomeSliderBanner banners={banners} />
             </section>
           </ContainerScroll>
         </AuroraBackground>

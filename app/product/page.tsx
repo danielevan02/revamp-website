@@ -12,19 +12,10 @@ const Product = async () => {
   return (
     <div className="flex relative">
       <div className="p-5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 w-full h-fit">
-        {products?.map((product) => (
+        {products?.map((product, idx) => (
           <ProductCard 
-            id={product.id}
-            photo={product.photo} 
-            name={product.name} 
-            categories={product.categories}
-            key={product.id}
-            categoryIds={product.categoryIds}
-            desc={product.desc}
-            variants={product.variants}
-            discount={product.discount}
-            price={product.price}
-            orderIds={product.orderIds}
+            key={idx}
+            {...product}
           />
         ))}
       </div>
