@@ -9,10 +9,10 @@ export const BentoGrid = ({ className, children }: { className?: string; childre
   useEffect(() => {
     inView("#bentoContainer", () => {
       animate(
-        ".bentoChildren", 
-        { opacity: 1, y: 0 }, 
-        { 
-          delay: stagger(0.2), 
+        ".bentoChildren",
+        { opacity: 1, y: 0 },
+        {
+          delay: stagger(0.2),
           duration: 1,
         }
       );
@@ -48,12 +48,12 @@ export const BentoGridItem = ({
       className={cn(
         "bentoChildren relative row-span-1  rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none p-4 dark:bg-black dark:border-white/[0.2] bg-white border overflow-hidden justify-between flex flex-col space-y-4",
         className,
-        index === 1 && 'col-span-2'
+        index === 1 && "col-span-2"
       )}
       style={{
         opacity: 0,
         y: 100,
-        transition: 'all'
+        transition: "all",
       }}
     >
       {index === 1 ? (

@@ -6,28 +6,31 @@ import { ContainerScroll } from "@/components/ui/ContainerScrollAnimation";
 import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
 import { Cover } from "@/components/ui/Cover";
 import { AuroraBackground } from "@/components/ui/AuroraBackground";
-import Awards from "@/components/Awards";
-import { CommunityCard } from "@/components/CommunityCard";
+import Awards from "@/components/home-components/Awards";
+import { CommunityCard } from "@/components/home-components/CommunityCard";
 import { TextHoverEffect } from "@/components/ui/TextHoverEffect";
-import { FooterBanner } from "@/components/FooterBanner";
+import { FooterBanner } from "@/components/home-components/FooterBanner";
 import Link from "next/link";
-import {getAllCategories} from "./action/product.action.ts/productAction";
+import {getAllCategories, getAllProducts, getCategory} from "./action/product.action.ts/productAction";
 import { advantage, content } from "@/lib/content";
 import { AnimatedTestimonials } from "@/components/ui/AnimatedTestimonials";
 import { getAllBanners } from "./action/product.action.ts/bannerAction";
-import HomeSliderBanner from "@/components/HomeSliderBanner";
+import HomeSliderBanner from "@/components/home-components/HomeSliderBanner";
+import FlashSaleSection from "@/components/home-components/FlashSaleSection";
 
 export const revalidate = 1;
 
 const Home = async () => {
   const categories = await getAllCategories()
   const banners = await getAllBanners()
+  const flashSale = await getCategory('67778fad3bebf3edd93370cb')
 
   const category =
     categories?.map((data) => {
       return {
         title: data.name,
         src: data.photo ?? "",
+        id: data.id
       };
     }) || [];
 
@@ -69,6 +72,14 @@ const Home = async () => {
           </ContainerScroll>
         </AuroraBackground>
       </section>
+
+      <section id="flashSale" className="mx-10 bg-neutral-100 rounded-xl shadow-inner shadow-black/25 p-5">
+        <FlashSaleSection 
+          data={flashSale!}
+          prevBtnStyle="bg-black/70 text-white rounded-md hover:bg-black hover:text-white h-24 -left-5"
+          nextBtnStyle="bg-black/70 text-white rounded-md hover:bg-black hover:text-white h-24 -right-5" 
+        />
+      </section>
       
       <section id="categories" className="mx-10">
         <h1 className="section-title">CATEGORIES</h1>
@@ -82,8 +93,8 @@ const Home = async () => {
         <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem]">
           {advantage.map((item) => (
             <BentoGridItem
-              index={item.id}
               key={item.id}
+              index={item.id}
               title={item.title}
               description={item.desc}
               header={item.header}

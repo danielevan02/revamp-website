@@ -3,7 +3,7 @@
 import React from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { CanvasRevealEffect } from "./ui/CanvasRevealEffect";
+import { CanvasRevealEffect } from "../ui/CanvasRevealEffect";
 import Image from "next/image";
 
 export function CommunityCard() {

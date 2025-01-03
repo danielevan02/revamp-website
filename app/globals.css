@@ -76,10 +76,12 @@
 
 ::-webkit-scrollbar {
   display: none;
+  width: 5px;
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #888;
+  border-radius: 20px;
 }
 
 /* Handle on hover */
@@ -101,4 +103,8 @@
 /* Untuk browser Webkit seperti Chrome, Safari */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+.scrollbar::-webkit-scrollbar {
+  display: block;
 }

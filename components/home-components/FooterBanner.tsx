@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Boxes } from "./ui/BackgroundBoxes";
+import { Boxes } from "../ui/BackgroundBoxes";
 import { cn } from "@/lib/utils";
 import { IconBrandInstagram } from "@tabler/icons-react";
 import Image from "next/image";

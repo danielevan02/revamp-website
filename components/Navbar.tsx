@@ -83,9 +83,7 @@ export default function Navbar() {
     <AnimatePresence>
       {(isVisible || !isLandingPage) && (
         <motion.nav
-          className={`${
-            isLandingPage ? "fixed" : "sticky"
-          } top-0 left-0 right-0  bg-white md:bg-white/90 shadow-md z-[99] backdrop-blur-sm`}
+          className="fixed top-0 left-0 right-0  bg-white md:bg-white/90 shadow-md z-[99] backdrop-blur-md"
           initial={isLandingPage ? { y: "-100%" } : { y: 0 }}
           animate={{ y: 0 }}
           exit={isLandingPage ? { y: "-100%" } : {}}
@@ -146,7 +144,9 @@ export default function Navbar() {
                     <Link
                       key={item.name}
                       href={item.href}
-                      className="text-gray-600 hover:text-primary block px-3 py-2 rounded-md text-base font-medium"
+                      className={cn("text-gray-600 hover:text-primary block px-3 py-2 rounded-md text-base font-medium", 
+                        item.href === path && 'font-extrabold text-lg'
+                      )}
                       aria-current={pathname === item.href ? "page" : undefined}
                       onClick={() => setIsOpen(false)}
                     >

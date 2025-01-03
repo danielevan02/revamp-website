@@ -1,8 +1,8 @@
 'use client'
 
 import React from "react";
-import { Highlight } from "./ui/HeroHighlight";
-import { InfiniteMovingCards } from "./ui/InfiniteMovingCards";
+import { Highlight } from "../ui/HeroHighlight";
+import { InfiniteMovingCards } from "../ui/InfiniteMovingCards";
 import { motion } from "framer-motion";
 
 const Awards = () => {

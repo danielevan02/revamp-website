@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { animate, inView, motion, stagger } from "framer-motion";
+import Link from "next/link";
 
 export const Card = React.memo(
   ({
@@ -55,6 +56,7 @@ Card.displayName = "Card";
 type Card = {
   title: string;
   src: string;
+  id: string
 };
 
 export function FocusCards({ cards }: { cards: Card[] }) {
@@ -72,14 +74,16 @@ export function FocusCards({ cards }: { cards: Card[] }) {
 
   return (
     <motion.div className="cardContainer flex gap-2 hide-scrollbar overflow-scroll w-full snap-x">
-      {cards.map((card, index) => (
-        <Card
-          key={card.title}
-          card={card}
-          index={index}
-          hovered={hovered}
-          setHovered={setHovered}
-        />
+      { cards.filter((card) => card.src.length !== 0 ).map((card, index) => (
+        <Link key={card.title} href={`/product?categories=${card.id}`}>
+          <Card
+            key={card.id}
+            card={card}
+            index={index}
+            hovered={hovered}
+            setHovered={setHovered}
+            />
+        </Link>
       ))}
     </motion.div>
   );
