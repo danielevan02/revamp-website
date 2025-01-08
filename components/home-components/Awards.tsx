@@ -53,8 +53,11 @@ const Awards = () => {
       }}
       viewport={{once: true}}
     >
-      <h1 className="section-title">
-        Our <Highlight className="text-black-200 dark:text-white">Awards</Highlight>
+      <h1 className="section-title flex gap-4 justify-center">
+        <span className="text-5xl md:text-7xl">Our</span> 
+        <Highlight className="dark:text-white text-5xl md:text-7xl">
+          <span className="text-transparent bg-gradient-to-r bg-clip-text from-yellow-300 via-yellow-100 to-yellow-700">Awards</span>
+        </Highlight>
       </h1>
       <InfiniteMovingCards direction="right" speed="slow" items={award} />
     </motion.div>

@@ -8,15 +8,16 @@ import { Cover } from "@/components/ui/Cover";
 import { AuroraBackground } from "@/components/ui/AuroraBackground";
 import Awards from "@/components/home-components/Awards";
 import { CommunityCard } from "@/components/home-components/CommunityCard";
-import { TextHoverEffect } from "@/components/ui/TextHoverEffect";
 import { FooterBanner } from "@/components/home-components/FooterBanner";
 import Link from "next/link";
-import {getAllCategories, getAllProducts, getCategory} from "./action/product.action.ts/productAction";
+import {getAllCategories, getCategory} from "./action/product.action.ts/productAction";
 import { advantage, content } from "@/lib/content";
 import { AnimatedTestimonials } from "@/components/ui/AnimatedTestimonials";
 import { getAllBanners } from "./action/product.action.ts/bannerAction";
 import HomeSliderBanner from "@/components/home-components/HomeSliderBanner";
 import FlashSaleSection from "@/components/home-components/FlashSaleSection";
+import { BackgroundBeams } from "@/components/ui/BackgroundBeams";
+import { FlipWords } from "@/components/ui/FlipWords";
 
 export const revalidate = 1;
 
@@ -24,6 +25,8 @@ const Home = async () => {
   const categories = await getAllCategories()
   const banners = await getAllBanners()
   const flashSale = await getCategory('67778fad3bebf3edd93370cb')
+
+  const words = ['Testimonials', 'Happy Customers', 'Reviews and Ratings']
 
   const category =
     categories?.map((data) => {
@@ -47,7 +50,7 @@ const Home = async () => {
           <TextGenerateEffect words="Breastfeeding Lifestyle Solution By GabaG Indonesia" duration={0.8} />
           <Link
             href="/product"
-            className="shadow-[inset_0_0_0_2px_#616467] backdrop-blur-lg text-white px-12 py-4 mt-10 rounded-full tracking-widest uppercase font-bold bg-transparent hover:bg-[#616467] hover:text-black-100 dark:text-neutral-200 transition duration-200 text-2xl"
+            className="shadow-[inset_0_0_0_2px_#616467] backdrop-blur-lg text-white px-12 py-4 mt-10 rounded-full tracking-widest uppercase font-bold bg-transparent hover:bg-[#616467] hover:text-black-100 dark:text-neutral-200 transition duration-200 text-lg md:text-2xl text-center"
           >
             browse our product collections
           </Link>
@@ -73,20 +76,21 @@ const Home = async () => {
         </AuroraBackground>
       </section>
 
-      <section id="flashSale" className="mx-10 bg-neutral-100 rounded-xl shadow-inner shadow-black/25 p-5">
+      <section id="flashSale" className="relative mx-10 rounded-xl p-5 bg-red-900">
+        <BackgroundBeams/>
         <FlashSaleSection 
           data={flashSale!}
-          prevBtnStyle="bg-black/70 text-white rounded-md hover:bg-black hover:text-white h-24 -left-5"
-          nextBtnStyle="bg-black/70 text-white rounded-md hover:bg-black hover:text-white h-24 -right-5" 
+          prevBtnStyle="-left-5"
+          nextBtnStyle="-right-5" 
         />
       </section>
       
-      <section id="categories" className="mx-10">
+      <section id="categories" className="mx-10 mt-36">
         <h1 className="section-title">CATEGORIES</h1>
         <FocusCards cards={category} />
       </section>
 
-      <section id="advantage" className="pt-20 mx-10 md:mx-0">
+      <section id="advantage" className="mt-44 mx-10 md:mx-0">
         <h1 className="text-4xl pb-20 md:text-4xl lg:text-6xl font-bold max-w-7xl mx-auto text-center mt-6 relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
           Kenapa memilih produk <br /> <Cover>Gabag Indonesia</Cover> ?
         </h1>
@@ -112,14 +116,19 @@ const Home = async () => {
         <Awards />
       </section>
 
-      <section id="community" className="text-center text-black-200">
+      <section id="community" className="text-center text-black-200 mt-36">
         <h1 className="section-title">Join Our Community</h1>
         <span className="md:text-xl">Kami memahami kebutuhan Mama untuk mendapatkan produk berkualitas</span>
         <CommunityCard />
       </section>
 
-      <section id="testimoni" className="py-72">
-        <TextHoverEffect text="Our Testimony" />
+      <section id="testimoni" className="py-60">
+        <div className="flex flex-col md:flex-row items-center w-full justify-center text-5xl md:text-7xl font-bold">
+          <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-green-700 via-blue-500 to-purple">
+            <span>Our</span>
+          </h1>
+          <FlipWords words={words}/>
+        </div>
         <AnimatedTestimonials testimonials={content}/>
       </section>
 

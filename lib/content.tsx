@@ -15,7 +15,7 @@ export const advantage = [
     desc: "Kami menyediakan garansi untuk tas kami selama 6 bulan dan breastpump 3 tahun",
     header: "/advantage/a2.png",
     icon: <IconCertificate className="h-4 w-4 text-neutral-500" />,
-    classname: "md:col-span-1",
+    classname: "col-span-2",
   },
   {
     id: 3,
@@ -23,7 +23,7 @@ export const advantage = [
     desc: "Setiap pembelian tas kami, anda mendapatkan ice gel secara langsung",
     header: "/advantage/a3.jpeg",
     icon: <IconFreeRights className="h-4 w-4 text-neutral-500" />,
-    classname: "md:col-span-1",
+    classname: "col-span-2 md:col-span-1",
   },
   {
     id: 4,
@@ -31,7 +31,7 @@ export const advantage = [
     desc: "Kami menjamin cooler bag kami tahan 24 jam dalam menjaga suhu asi tetap dingin.",
     header: "/advantage/a1.jpg",
     icon: <IconClock24 className="h-4 w-4 text-neutral-500" />,
-    classname: "md:col-span-1",
+    classname: "col-span-2 md:col-span-1",
   },
   {
     id: 5,

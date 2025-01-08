@@ -107,4 +107,9 @@
 
 .scrollbar::-webkit-scrollbar {
   display: block;
+  height: 5px;
+}
+
+.field-sizing {
+  field-sizing: content;
 }

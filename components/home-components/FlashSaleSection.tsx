@@ -39,8 +39,9 @@ const FlashSaleSection: React.FC<FlashSaleSectionProps> = ({data, prevBtnStyle, 
               font-extrabold 
               bg-clip-text 
               text-transparent 
-              bg-gradient-to-b 
-              from-red-500 
+              bg-gradient-to-r 
+              from-green-500 
+              via-white
               to-blue-600 
               flex 
               mb-5

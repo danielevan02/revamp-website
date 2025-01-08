@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export function FooterBanner() {
   return (
-    <div className="h-80 relative w-full overflow-hidden bg-slate-900 flex flex-col items-center justify-center rounded-lg">
+    <div className="h-80 relative w-full overflow-hidden bg-slate-900 flex flex-col items-center justify-center">
       <div className="absolute inset-0 w-full h-full bg-slate-900 z-10 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
       <Boxes />
       <div className="flex flex-col justify-center items-center" >

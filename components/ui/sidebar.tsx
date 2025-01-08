@@ -115,11 +115,11 @@ export const MobileSidebar = ({
     <>
       <div
         className={cn(
-          "h-10 px-4 py-4 flex flex-row md:hidden items-center justify-between z-[9999] w-screen dark:bg-neutral-800 mt-24 "
+          "h-10 px-4 py-4 flex flex-row md:hidden items-center justify-between w-screen dark:bg-neutral-800 mt-24 "
         )}
         {...props}
       >
-        <div className="flex justify-center w-full gap-2 text-white bg-black py-1 rounded-md cursor-pointer active:scale-75 transition-all" onClick={() => setOpen(true)}>
+        <div className="flex fixed z-50 justify-center w-[460px] gap-2 text-white bg-black py-1 rounded-md cursor-pointer active:scale-95 transition-all" onClick={() => setOpen(true)}>
           <IconFilter className="dark:text-neutral-800 text-neutral-200"/>
           <span>Filter</span>
         </div>
@@ -134,7 +134,7 @@ export const MobileSidebar = ({
                 ease: "easeInOut",
               }}
               className={cn(
-                "fixed h-full w-full inset-0 bg-white mt-20 dark:bg-neutral-900 p-10 z-[100] flex flex-col justify-between",
+                "fixed h-full w-full inset-0 bg-white mt-20 dark:bg-neutral-900 p-10 z-[99999] flex flex-col justify-between",
                 className
               )}
             >

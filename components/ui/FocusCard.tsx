@@ -73,7 +73,7 @@ export function FocusCards({ cards }: { cards: Card[] }) {
   }, [])
 
   return (
-    <motion.div className="cardContainer flex gap-2 hide-scrollbar overflow-scroll w-full snap-x">
+    <motion.div className="cardContainer flex gap-2 hide-scrollbar overflow-x-scroll w-full snap-x">
       { cards.filter((card) => card.src.length !== 0 ).map((card, index) => (
         <Link key={card.title} href={`/product?categories=${card.id}`}>
           <Card

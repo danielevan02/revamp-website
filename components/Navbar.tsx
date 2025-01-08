@@ -58,7 +58,6 @@ export default function Navbar() {
       setIsVisible(true);
       return;
     }
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isLandingPage, handleScroll]);
@@ -103,7 +102,7 @@ export default function Navbar() {
                     <Link
                       href={item.href}
                       className={cn('text-gray-600 hover:text-primary px-3 py-2 uppercase text-sm rounded-md',
-                        item.href === path ? 'font-extrabold' : 'font-medium'
+                        path.startsWith(item.href) ? 'font-extrabold' : 'font-medium'
                       )}
                       aria-current={pathname === item.href ? "page" : undefined}
                     >
@@ -145,7 +144,7 @@ export default function Navbar() {
                       key={item.name}
                       href={item.href}
                       className={cn("text-gray-600 hover:text-primary block px-3 py-2 rounded-md text-base font-medium", 
-                        item.href === path && 'font-extrabold text-lg'
+                        path.startsWith(item.href) && 'font-extrabold text-lg'
                       )}
                       aria-current={pathname === item.href ? "page" : undefined}
                       onClick={() => setIsOpen(false)}

@@ -3,6 +3,7 @@
 import type { Config } from "tailwindcss";
 import tailwindCss from 'tailwindcss-animate'
 import svgToDataUri from "mini-svg-data-uri";
+import { plugin } from "postcss";
 
 const {
   default: flattenColorPalette,

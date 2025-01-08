@@ -1,6 +1,6 @@
 "use client";
 
-import { IconArrowRight, IconFilter, IconSearch } from "@tabler/icons-react";
+import { IconAdjustmentsSearch, IconFilter, IconSearch } from "@tabler/icons-react";
 import { SidebarBody, Sidebar } from "./ui/sidebar";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { Category } from "@prisma/client";
@@ -25,7 +25,7 @@ const ProductSidebar = ({ categories }: { categories: Category[] }) => {
     if (categoriesQuery) {
       setSelectedCategories(categoriesQuery.split(','));
     }
-  }, [])
+  }, [searchParams])
 
   const updateQueryParams = (
     newParams: Record<string, string | undefined>,
@@ -76,6 +76,12 @@ const ProductSidebar = ({ categories }: { categories: Category[] }) => {
     setMaximum(formattedValue);
   };
 
+  const handlePrice = () => {
+    const newMinimum = minimum.replace(/,/g, "")
+    const newMaximum = maximum.replace(/,/g, "")
+    updateQueryParams({maxPrice: newMaximum, minPrice: newMinimum}, searchParams, router)
+  }
+
   const handleCheckboxChange = (category: string) => {
     const updatedCategories = selectedCategories.includes(category)
       ? selectedCategories.filter((item) => item !== category)
@@ -101,9 +107,9 @@ const ProductSidebar = ({ categories }: { categories: Category[] }) => {
             </div>
           )}
 
-          <IconArrowRight
+          <IconAdjustmentsSearch
             className={cn(
-              "absolute top-1/2 -translate-y-1/2 text-white rounded-full bg-black/30 cursor-pointer hover:bg-black-100 transition-all duration-700 ",
+              "absolute top-1/2 -translate-y-1/2 text-white rounded-lg bg-black/20 cursor-pointer",
               open && "hidden"
             )}
             size={30}
@@ -145,7 +151,7 @@ const ProductSidebar = ({ categories }: { categories: Category[] }) => {
                   <Input className="pl-8" placeholder="Maximum price" value={maximum} onChange={handleMaximum} />
                 </div>
               </div>
-              <Button className="mt-3">Apply Price</Button>
+              <Button className="mt-3" onClick={handlePrice}>Apply Price</Button>
             </div>
           </div>
         </div>

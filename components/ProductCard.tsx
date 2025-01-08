@@ -45,13 +45,13 @@ const ProductCard: React.FC<ProductCardProps> = ({name, categories, photo, varia
         transition: 'all'
       }}
     >
-      <picture className="overflow-hidden rounded-lg w-full h-full bg-red-300">
+      <picture className="overflow-hidden rounded-lg w-full">
         <Image 
           src={photo} 
           width={1000} 
           height={1000} 
           alt={name} 
-          className="w-full h-full max-h-72 object-cover group-hover/product:scale-125 transition-all duration-200" />
+          className="object-cover object-center max-h-72 group-hover/product:scale-125 transition-all duration-200" />
       </picture>
       <div className="flex flex-col text-black-200/70 mt-3">
         <h1 className="font-light capitalize">{categories![0].name}</h1>
@@ -71,7 +71,7 @@ const ProductCard: React.FC<ProductCardProps> = ({name, categories, photo, varia
           : (
               <div className="flex flex-col">
                 {discount! > 0 && <Badge className="w-fit" variant='destructive'>-{discount}%</Badge>}
-                <span className={cn("text-sm md:text-base xl:text-lg font-extrabold w-32 xl:w-full", discount! > 0 && 'text-red-400')}>
+                <span className={cn("text-sm md:text-base xl:text-lg font-extrabold xl:w-full line-clamp-1", discount! > 0 && 'text-red-400 text-xl')}>
                   Rp{minPrice.toLocaleString()} - Rp{maxPrice.toLocaleString()}
                 </span>
               </div>
