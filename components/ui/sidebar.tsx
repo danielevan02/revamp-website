@@ -119,7 +119,7 @@ export const MobileSidebar = ({
         )}
         {...props}
       >
-        <div className="flex fixed z-50 justify-center w-[460px] gap-2 text-white bg-black py-1 rounded-md cursor-pointer active:scale-95 transition-all" onClick={() => setOpen(true)}>
+        <div className="flex fixed z-50 justify-center w-[90%] lg:w-[460px] gap-2 text-white bg-black py-1 rounded-md cursor-pointer active:scale-95 transition-all" onClick={() => setOpen(true)}>
           <IconFilter className="dark:text-neutral-800 text-neutral-200"/>
           <span>Filter</span>
         </div>
