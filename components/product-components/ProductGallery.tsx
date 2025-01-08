@@ -17,7 +17,7 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ productPhoto, variantPh
   return (
     <div className="sticky items-start w-full md:w-fit lg:top-44 md:top-72 flex flex-col-reverse md:flex-row gap-3">
       {/* Desktop views for photo gallery */}
-      <div className="flex md:flex-col gap-3 max-h-[500px] max-w-full overflow-scroll scrollbar pr-1 pb-1 md:pb-0">
+      <div className="flex md:flex-col gap-3 max-h-[500px] max-w-full w-full md:w-24 overflow-scroll scrollbar pr-1 pb-1 md:pb-0">
         {imageGallery?.map((photo, idx) => (
           <picture
             className="relative min-h-20 min-w-20 rounded-md overflow-hidden group/variant cursor-pointer"
