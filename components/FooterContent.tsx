@@ -36,10 +36,10 @@ const FooterContent = () => {
     },
   ];
   return (
-    <footer className="bg-slate-900 p-10 relative w-full">
-      <div className="flex gap-5 justify-evenly">
-        <div className="logo-content flex flex-col gap-10">
-          <Image src="/logo-footer.png" width={1000} height={1000} alt="logo" className="w-52 h-36 object-cover" />
+    <footer className="bg-slate-900 p-4 md:p-10 relative w-full">
+      <div className="flex gap-5 justify-evenly flex-col md:flex-row">
+        <div className="logo-content flex flex-col md:gap-10 gap-5 items-center">
+          <Image src="/logo-footer.png" width={1000} height={1000} alt="logo" className="w-36 md:w-52 h-28 md:h-36 object-cover" />
           <div className="flex flex-col text-white-200 text-center">
             <span>Our Contact:</span>
             <span>+62 811-8242-224</span>
@@ -64,7 +64,7 @@ const FooterContent = () => {
             ))}
           </div>
         </div>
-        <div className="flex justify-between gap-20">
+        <div className="flex justify-between gap-20 mb-10">
           {detailMenu.map((item, i) => (
             <div key={i} className="text-white-200">
               <h1 className="text-xl font-bold">{item.title}</h1>
@@ -76,9 +76,8 @@ const FooterContent = () => {
             </div>
           ))}
         </div>
-        <div className="flex flex-col"></div>
       </div>
-      <span className="absolute bottom-1 left-1/2 z-10 text-white-200 -translate-x-1/2">
+      <span className="absolute bottom-1 left-1/2 z-10 text-white-200 -translate-x-1/2 w-full text-center line-clamp-1">
         Copyright&copy;2024 Daniel Evan{" "}
       </span>
     </footer>

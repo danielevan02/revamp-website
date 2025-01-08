@@ -38,7 +38,7 @@ const ProductCard: React.FC<ProductCardProps> = ({name, categories, photo, varia
 
   return (
     <motion.div 
-      className="productCard relative min-w-[340px] flex-1 min-h-52 max-w-md max-h-[30rem] flex flex-col bg-white p-5 border rounded-lg group/product transition-all duration-200 hover:shadow-lg"
+      className="productCard relative min-w-[280px] md:min-w-[340px] flex-1 min-h-52 max-w-md max-h-[30rem] flex flex-col bg-white p-5 border rounded-lg group/product transition-all duration-200 hover:shadow-lg"
       style={{
         opacity: 0,
         y: 10,

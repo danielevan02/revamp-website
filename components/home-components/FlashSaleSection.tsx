@@ -56,7 +56,7 @@ const FlashSaleSection: React.FC<FlashSaleSectionProps> = ({data, prevBtnStyle, 
       <Carousel className="w-full">
         <CarouselContent className="">
           {products.map((product) => (
-            <CarouselItem key={product.id} className="pl-1 md:basis-1/2 lg:basis-1/4">
+            <CarouselItem key={product.id} className="pl-1 basis-1 md:basis-1/2 lg:basis-1/4">
               <ProductCard
                 {...product}
               />

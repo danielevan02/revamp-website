@@ -46,11 +46,11 @@ const Home = async () => {
             backgroundImage: "linear-gradient(0deg, rgba(0,0,0,0.4) 20%, rgba(0,0,0,0.6) 50%), url(/main-photo.png)",
           }}
         >
-          <span className="text-white-200 uppercase">Competitive Quality and Innovative Solutions.</span>
+          <span className="text-white-200 uppercase text-center">Competitive Quality and Innovative Solutions.</span>
           <TextGenerateEffect words="Breastfeeding Lifestyle Solution By GabaG Indonesia" duration={0.8} />
           <Link
             href="/product"
-            className="shadow-[inset_0_0_0_2px_#616467] backdrop-blur-lg text-white px-12 py-4 mt-10 rounded-full tracking-widest uppercase font-bold bg-transparent hover:bg-[#616467] hover:text-black-100 dark:text-neutral-200 transition duration-200 text-lg md:text-2xl text-center"
+            className="shadow-[inset_0_0_0_2px_#616467] backdrop-blur-lg text-white px-4 md:px-12 py-4 mt-10 rounded-full tracking-widest uppercase font-bold bg-transparent hover:bg-[#616467] hover:text-black-100 dark:text-neutral-200 transition duration-200 text-sm md:text-2xl text-center"
           >
             browse our product collections
           </Link>
@@ -76,7 +76,7 @@ const Home = async () => {
         </AuroraBackground>
       </section>
 
-      <section id="flashSale" className="relative mx-10 rounded-xl p-5 bg-red-900">
+      <section id="flashSale" className="relative mx-2 md:mx-10 rounded-xl p-5 bg-red-900">
         <BackgroundBeams/>
         <FlashSaleSection 
           data={flashSale!}
@@ -123,11 +123,12 @@ const Home = async () => {
       </section>
 
       <section id="testimoni" className="py-60">
-        <div className="flex flex-col md:flex-row items-center w-full justify-center text-5xl md:text-7xl font-bold">
-          <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-green-700 via-blue-500 to-purple">
+        <div className="flex flex-col md:flex-row items-center w-full justify-center text-4xl md:text-7xl font-bold">
+          <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-green-700 via-blue-500 to-purple flex gap-3">
             <span>Our</span>
+            <span className="lg:hidden">Testimony</span>
           </h1>
-          <FlipWords words={words}/>
+          <FlipWords words={words} className="hidden lg:flex"/>
         </div>
         <AnimatedTestimonials testimonials={content}/>
       </section>
