@@ -10,8 +10,8 @@ const inter = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "GabaG Indonesia",
-  description: "Breastfeeding lifestyle solutions",
+  title: "GabaG Indonesia - Perlengkapan Ibu Hamil dan Ibu Menyusui",
+  description: "Breastfeeding lifestyle solutions: Perlengkapan Ibu Menyusui dan Ibu Hamil",
 };
 
 export default function RootLayout({
