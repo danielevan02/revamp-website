@@ -49,13 +49,13 @@ const VariantSelector: React.FC<VariantSelectorProps> = ({ discount, variants, p
             ? (
                 <>
                   {discount !== 0 && <span className="line-through text-neutral-400">Rp{price.toLocaleString()}</span>}
-                  <span className={cn("text-4xl font-bold", discount && 'text-red-500')}>
+                  <span className={cn("text-2xl md:text-4xl font-bold", discount && 'text-red-500')}>
                     Rp{[discountedPrice ?? price].toLocaleString()}
                   </span>
                 </>
               )
             : (
-                <span className={cn("text-4xl font-bold", discount && 'text-red-500')}>
+                <span className={cn("text-2xl md:text-4xl font-bold", discount && 'text-red-500')}>
                   Rp{price.minPrice.toLocaleString()} - Rp{price.maxPrice.toLocaleString()}
                 </span>
               )

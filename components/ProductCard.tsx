@@ -51,7 +51,7 @@ const ProductCard: React.FC<ProductCardProps> = ({name, categories, photo, varia
           width={1000} 
           height={1000} 
           alt={name} 
-          className="object-cover object-center max-h-72 group-hover/product:scale-125 transition-all duration-200" />
+          className="object-cover object-center max-h-56 md:max-h-72 group-hover/product:scale-125 transition-all duration-200" />
       </picture>
       <div className="flex flex-col text-black-200/70 mt-3">
         <h1 className="font-light capitalize">{categories![0].name}</h1>
@@ -71,15 +71,15 @@ const ProductCard: React.FC<ProductCardProps> = ({name, categories, photo, varia
           : (
               <div className="flex flex-col">
                 {discount! > 0 && <Badge className="w-fit" variant='destructive'>-{discount}%</Badge>}
-                <span className={cn("text-sm md:text-base xl:text-lg font-extrabold xl:w-full line-clamp-1", discount! > 0 && 'text-red-400 text-xl')}>
+                <span className={cn("text-xl md:text-base xl:text-lg font-extrabold xl:w-full line-clamp-1", discount! > 0 && 'text-red-400')}>
                   Rp{minPrice.toLocaleString()} - Rp{maxPrice.toLocaleString()}
                 </span>
               </div>
             )  
         }
       </div>
-      <Link href={`/product/${id}`} className="flex items-center justify-center gap-1 absolute bottom-2 right-2 border text-green-600 bg-green-200 rounded-full py-2  px-2 lg:px-4 transition-all duration-200 hover:shadow-sm hover:shadow-green-400">
-        <IconShoppingCart size={15}/>
+      <Link href={`/product/${id}`} className="flex items-center justify-center gap-1 absolute bottom-2 right-2 border text-green-600 bg-green-200 rounded-full p-3 lg:px-4 transition-all duration-200 hover:shadow-sm hover:shadow-green-400">
+        <IconShoppingCart className="h-8 w-8 md:h-4 md:w-4"/>
         <span className="font-bold hidden lg:flex text-sm">Buy</span>
       </Link>
     </motion.div>

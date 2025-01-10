@@ -5,6 +5,8 @@ import Navbar from "@/components/Navbar";
 import { Outfit } from "next/font/google";
 import { CustomerServiceButton } from "@/components/CustomerServiceButton";
 import FooterContent from "@/components/FooterContent";
+import ToasterContext from "@/lib/context/ToasterContext";
+import AuthContext from "@/lib/context/AuthContext";
 const inter = Outfit({
   subsets: ["latin"],
 });
@@ -22,11 +24,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased hide-scrollbar bg-[#f9f9f9]`}>
+        <ToasterContext/>
         <ThemeProvider defaultTheme="light">
-          <Navbar />
-          {children}
-          <CustomerServiceButton />
-          <FooterContent />
+          <AuthContext>
+            <Navbar />
+            {children}
+            <CustomerServiceButton />
+            <FooterContent />
+          </AuthContext>
         </ThemeProvider>
       </body>
     </html>

@@ -17,20 +17,24 @@ const menuItems = [
 ];
 
 const LoginButton = ({className}: {className?: ClassNameValue}) => (
-  <button
+  <Link
+    href='/login?type=login'
     className={`px-6 py-2 rounded-xl border flex justify-center items-center font-semibold border-black bg-white text-black text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200 ${className}`}
   >
     Login
-  </button>
+  </Link>
 );
 
 const SignInButton = ({className}: {className?: ClassNameValue}) => (
-  <button className={cn("p-[3px] relative", className)}>
+  <Link
+   className={cn("p-[3px] relative", className)}
+   href='/login?type=signup'
+  >
     <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-xl" />
     <div className="px-5 py-2  bg-black rounded-lg relative group transition duration-200 text-white hover:bg-transparent">
       Sign Up
     </div>
-  </button>
+  </Link>
 );
 
 export default function Navbar() {
@@ -82,7 +86,7 @@ export default function Navbar() {
     <AnimatePresence>
       {(isVisible || !isLandingPage) && (
         <motion.nav
-          className="fixed top-0 left-0 right-0  bg-white md:bg-white/90 shadow-md z-[99] backdrop-blur-md"
+          className={cn("fixed top-0 left-0 right-0  bg-white md:bg-white/90 shadow-md z-[99] backdrop-blur-md", path === '/login' && 'hidden')}
           initial={isLandingPage ? { y: "-100%" } : { y: 0 }}
           animate={{ y: 0 }}
           exit={isLandingPage ? { y: "-100%" } : {}}

@@ -116,8 +116,10 @@ const Home = async () => {
         <Awards />
       </section>
 
-      <section id="community" className="text-center text-black-200 mt-36">
-        <h1 className="section-title">Join Our Community</h1>
+      <section id="community" className="text-center mt-36">
+        <h1 className="section-title">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-black via-blue-300 to-red-700">Join Our Community</span>
+        </h1>
         <span className="md:text-xl">Kami memahami kebutuhan Mama untuk mendapatkan produk berkualitas</span>
         <CommunityCard />
       </section>
