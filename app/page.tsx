@@ -1,4 +1,3 @@
-import { BackgroundBeamsWithCollision } from "@/components/ui/BackgroundBeamsWithCollision";
 import { FocusCards } from "@/components/ui/FocusCard";
 import { TextGenerateEffect } from "@/components/ui/TextGenerateEffect";
 import React from "react";
@@ -18,6 +17,7 @@ import HomeSliderBanner from "@/components/home-components/HomeSliderBanner";
 import FlashSaleSection from "@/components/home-components/FlashSaleSection";
 import { BackgroundBeams } from "@/components/ui/BackgroundBeams";
 import { FlipWords } from "@/components/ui/FlipWords";
+import Image from "next/image";
 
 export const revalidate = 1;
 
@@ -39,23 +39,27 @@ const Home = async () => {
 
   return (
     <>
-      <BackgroundBeamsWithCollision>
-        <div
-          className="w-screen h-screen bg-center bg-cover flex flex-col gap-4 justify-center items-center bg-fixed"
-          style={{
-            backgroundImage: "linear-gradient(0deg, rgba(0,0,0,0.4) 20%, rgba(0,0,0,0.6) 50%), url(/main-photo.png)",
-          }}
+      <div
+        className="relative w-screen h-screen flex flex-col gap-4 justify-center items-center"
+      >
+        <Image
+          src='/main-photo.png'
+          height={1000}
+          width={1000}
+          className="w-full h-full object-cover absolute"
+          alt="main-banner"
+          priority
+        />
+        <div className="absolute w-full h-full bg-gradient-to-b opacity-80 from-blue-950 via-black"/>
+        <span className="text-white-200 uppercase text-center">Competitive Quality and Innovative Solutions.</span>
+        <TextGenerateEffect words="Breastfeeding Lifestyle Solution By GabaG Indonesia" duration={0.8} />
+        <Link
+          href="/product"
+          className="shadow-[inset_0_0_0_2px_#616467] backdrop-blur-lg text-white px-4 md:px-12 py-4 mt-10 rounded-full tracking-widest uppercase font-bold bg-transparent hover:bg-[#616467] hover:text-black-100 dark:text-neutral-200 transition duration-200 text-sm md:text-2xl text-center"
         >
-          <span className="text-white-200 uppercase text-center">Competitive Quality and Innovative Solutions.</span>
-          <TextGenerateEffect words="Breastfeeding Lifestyle Solution By GabaG Indonesia" duration={0.8} />
-          <Link
-            href="/product"
-            className="shadow-[inset_0_0_0_2px_#616467] backdrop-blur-lg text-white px-4 md:px-12 py-4 mt-10 rounded-full tracking-widest uppercase font-bold bg-transparent hover:bg-[#616467] hover:text-black-100 dark:text-neutral-200 transition duration-200 text-sm md:text-2xl text-center"
-          >
-            browse our product collections
-          </Link>
-        </div>
-      </BackgroundBeamsWithCollision>
+          browse our product collections
+        </Link>
+      </div>
 
       <section id="promo">
         <AuroraBackground>

@@ -7,6 +7,7 @@ import { CustomerServiceButton } from "@/components/CustomerServiceButton";
 import FooterContent from "@/components/FooterContent";
 import ToasterContext from "@/lib/context/ToasterContext";
 import AuthContext from "@/lib/context/AuthContext";
+import QueryProvider from "@/lib/QueryProvider";
 const inter = Outfit({
   subsets: ["latin"],
 });
@@ -26,12 +27,14 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased hide-scrollbar bg-[#f9f9f9]`}>
         <ToasterContext/>
         <ThemeProvider defaultTheme="light">
-          <AuthContext>
-            <Navbar />
-            {children}
-            <CustomerServiceButton />
-            <FooterContent />
-          </AuthContext>
+            <AuthContext>
+              <Navbar />
+              <QueryProvider>
+                {children}
+              </QueryProvider>
+              <CustomerServiceButton />
+              <FooterContent />
+            </AuthContext>
         </ThemeProvider>
       </body>
     </html>

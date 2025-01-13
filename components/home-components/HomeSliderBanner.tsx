@@ -17,7 +17,14 @@ const HomeSliderBanner = ({banners}: {banners: Banner[]}) => {
         {banners?.map((item) => (
           <CarouselItem key={item.id} className="w-full">
             <Card className=" w-full overflow-hidden flex p-0 items-center justify-center object-cover">
-              <Image src={item.photo} width={1000} height={1000} alt={item.name} className="object-cover w-full" />
+              <Image 
+                src={item.photo} 
+                width={500} 
+                height={500} 
+                alt={item.name} 
+                className="object-cover w-full" 
+                priority
+              />
             </Card>
           </CarouselItem>
         ))}

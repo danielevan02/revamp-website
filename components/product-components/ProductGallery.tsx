@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Lens } from "../ui/Lens";
+import { useVariantPhoto } from "@/lib/store";
 
 interface ProductGalleryProps {
   productPhoto?: string;
@@ -10,9 +11,18 @@ interface ProductGalleryProps {
 }
 
 const ProductGallery: React.FC<ProductGalleryProps> = ({ productPhoto, variantPhoto }) => {
+  const varPhoto = useVariantPhoto((state) => state.photo)
   const [image, setImage] = useState(productPhoto);
   const [hovering, setHovering] = useState(false);
-  const imageGallery = [productPhoto, ...variantPhoto!];
+  const imageGallery = useMemo(()=> [productPhoto, ...variantPhoto!], [productPhoto, variantPhoto]) 
+
+  useEffect(() => {
+    if(varPhoto.length !== 0){
+      setImage(varPhoto);
+    } else {
+      setImage(productPhoto)
+    }
+  }, [varPhoto, productPhoto]);
 
   return (
     <div className="sticky items-start w-full md:w-fit lg:top-44 md:top-72 flex flex-col-reverse md:flex-row gap-3">
@@ -23,7 +33,7 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ productPhoto, variantPh
             key={idx}
             onMouseEnter={() => setImage(photo!)}
           >
-            <Image alt={photo!} src={photo!} width={200} height={200} className="object-cover h-full w-full" priority loading="eager"/>
+            <Image alt={photo!} src={photo!} width={200} height={200} className="object-cover h-full w-full" priority/>
             <div className="pointer-events-none absolute inset-0 group-hover/variant:bg-black/50 transition-all z-20" />
           </picture>
         ))}

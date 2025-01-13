@@ -7,18 +7,26 @@ import { cn } from "@/lib/utils";
 import { IconArrowRight, IconBrandFacebook, IconBrandGoogle, IconChevronLeft, IconHome } from "@tabler/icons-react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema } from "@/lib/models";
+import { loginSchema, signUpSchema } from "@/lib/models";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import {useMutation} from '@tanstack/react-query'
+import { createUser } from "@/app/action/product.action.ts/userAction";
+import toast from "react-hot-toast";
+import { signIn } from "next-auth/react";
 
 interface AuthFormProps {
   type: 'login' | 'signup'
 }
 
 export type LoginType = z.infer<typeof loginSchema>;
+export type signUpType = z.infer<typeof signUpSchema>
 
 const AuthForm: React.FC<AuthFormProps> = ({type}) => {
+  const {mutate, isPending} = useMutation({
+    mutationFn: (data: signUpType) => createUser(data)
+  })
   const [authType, setAuthType] = useState(type)
   const [passType, setPassType] = useState('password')
   const router = useRouter()
@@ -36,19 +44,66 @@ const AuthForm: React.FC<AuthFormProps> = ({type}) => {
       email: "",
       phone: "",
     },
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(signUpSchema),
   });
+
+  const {
+    register: registerLogin,
+    handleSubmit: handleSubmitLogin
+  } = useForm({
+    defaultValues:{
+      email: '',
+      password:''
+    },
+    resolver: zodResolver(loginSchema)
+  })
 
   useEffect(()=>{
     router.replace(`/login?type=${authType}`)
   }, [authType, router])
 
 
-  const onSubmit: SubmitHandler<LoginType> = (data) => {
-    console.log(data)
+  const onSubmit: SubmitHandler<LoginType | signUpType> = async (data) => {
+    try {
+      if(authType === 'signup'){
+        mutate(
+          data as signUpType, 
+          {
+            onSuccess: (res)=>{
+              if(res?.message)toast.success(res.message)
+              setAuthType('login')
+            }
+          }
+        )
+      } else {
+        signIn('credentials', {
+          ...data as LoginType,
+          redirect: false
+        })
+        .then((res)=>{
+          if(res?.error){
+            console.log(res.error)
+            toast.error('Invalid credentials')
+          }
+          if(res?.ok && !res.error){
+            toast.success('Logged in!')
+            router.push('/product')
+          }
+        })
+      }
+    } catch (error) {
+      console.log('ERROR_CREATING_USER', error)
+    }
   };
   return (
-    <form className="mb-4" onSubmit={handleSubmit(onSubmit)}>
+    <form 
+      className="mb-4" 
+      onSubmit={
+        authType === 'signup'
+        ? handleSubmit(onSubmit)
+        : handleSubmitLogin(onSubmit)
+      }
+    >
       <Link href='/' className="flex bg-blue-500 w-fit rounded-md p-1 hover:bg-blue-400 transition-all items-center gap-1 text-sm mb-4 text-white">
         <IconChevronLeft className="h-5 w-5"/>
         Back to home
@@ -58,38 +113,60 @@ const AuthForm: React.FC<AuthFormProps> = ({type}) => {
         <div className={cn("flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4", authType === 'login' && 'hidden')}>
           <LabelInputContainer>
             <Label htmlFor="firstname">First name</Label>
-            <Input id="firstname" placeholder="Tyler" type="text" {...register('firstName')} errors={errors.firstName?.message} />
+            <Input id="firstname" placeholder="Tyler" type="text" {...register('firstName')} errors={errors.firstName?.message} disabled={isPending} />
           </LabelInputContainer>
           <LabelInputContainer>
             <Label htmlFor="lastname">Last name</Label>
-            <Input id="lastname" placeholder="Durden" type="text" {...register('lastName')} errors={errors.lastName?.message} />
+            <Input id="lastname" placeholder="Durden" type="text" {...register('lastName')} errors={errors.lastName?.message} disabled={isPending} />
           </LabelInputContainer>
         </div>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" placeholder="projectmayhem@fc.com" type="email" {...register('email')} errors={errors.email?.message} />
+          <Input 
+            id="email" 
+            placeholder="projectmayhem@fc.com" 
+            type="email" 
+            {...(authType === 'signup'
+              ? register('email')
+              : registerLogin('email')
+            )} 
+            errors={errors.email?.message} 
+            disabled={isPending} 
+          />
         </LabelInputContainer>
         <LabelInputContainer className={cn("mb-4", authType === 'login' && 'hidden')} >
           <Label htmlFor="address">Address</Label>
-          <Input id="address" placeholder="projectmayhem@fc.com" type="textarea" {...register('address')} errors={errors.address?.message} />
+          <Input id="address" placeholder="711 Leavenworth Apt. # 47 San Francisco, CA 94109" type="textarea" {...register('address')} errors={errors.address?.message} disabled={isPending} />
         </LabelInputContainer>
         <LabelInputContainer className={cn("mb-4", authType === 'login' && 'hidden')}>
           <Label htmlFor="phone">Phone</Label>
-          <Input id="phone" placeholder="08**********" type="text" {...register('phone')} errors={errors.phone?.message} />
+          <Input id="phone" placeholder="08**********" type="text" {...register('phone')} errors={errors.phone?.message} disabled={isPending}/>
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" placeholder="••••••••" type={passType} setType={setPassType} {...register('password')} errors={errors.password?.message}/>
+          <Input 
+            id="password" 
+            placeholder="••••••••" 
+            type={passType} 
+            setType={setPassType} 
+            {...(authType === 'signup'
+              ? register('password')
+              : registerLogin('password')
+            )} 
+            errors={errors.password?.message} 
+            disabled={isPending}
+          />
         </LabelInputContainer>
         <LabelInputContainer className={cn("mb-8", authType === 'login' && 'hidden')}>
           <Label htmlFor="confirmPass">Confirm password</Label>
-          <Input id="confirmPass" placeholder="••••••••" type="password" {...register('confirmPass')} errors={errors.confirmPass?.message} />
+          <Input id="confirmPass" placeholder="••••••••" type="password" {...register('confirmPass')} errors={errors.confirmPass?.message} disabled={isPending}/>
         </LabelInputContainer>
       </div>
 
       <button
         className="hover:bg-neutral-800 bg-black active:scale-95 transition-all relative group/btn flex gap-2 items-center justify-center w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
         type="submit"
+        disabled={isPending}
       >
         {authType === 'login' ? 'Login':'Sign Up'}
         <IconArrowRight size={15} className="opacity-0 group-hover/btn:opacity-100 -translate-x-2 group-hover/btn:translate-x-0 transition-all"/>

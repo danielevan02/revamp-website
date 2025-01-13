@@ -8,7 +8,7 @@ const validPrefixes = [
   "0889"
 ];
 
-export const loginSchema = z.object({
+export const signUpSchema = z.object({
   firstName: z.string().min(1, 'Please enter your first name!'),
   lastName: z.string().min(1, 'Please enter your last name!'),
   password: z.string({message: 'Please enter your password!'}).min(8, 'Password length must be greater than 8 characters'),
@@ -17,3 +17,8 @@ export const loginSchema = z.object({
   address: z.string().optional(),
   phone: z.string().min(10, 'Enter a valid phone number!').max(14, 'Enter a valid phone number!').refine((val) => validPrefixes.some((prefix) => val.startsWith(prefix)), 'Enter a valid phone number!')
 }).refine((data) => data.password === data.confirmPass, {message: 'Confirm Password does not match', path: ['confirmPass']})
+
+export const loginSchema = z.object({
+  email: z.string().email('Please enter a valid email!').min(1, 'Please enter your email!'),
+  password: z.string({message: 'Please enter your password!'}).min(8, 'Password length must be greater than 8 characters'),
+})

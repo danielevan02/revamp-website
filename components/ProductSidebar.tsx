@@ -33,7 +33,6 @@ const ProductSidebar = ({ categories }: { categories: Category[] }) => {
     router: AppRouterInstance
   ) => {
     const updatedParams = new URLSearchParams(currentParams.toString());
-
     Object.entries(newParams).forEach(([key, value]) => {
       if (value) {
         updatedParams.set(key, value);
@@ -95,7 +94,7 @@ const ProductSidebar = ({ categories }: { categories: Category[] }) => {
   return (
     <Sidebar open={open} setOpen={setOpen}>
       <SidebarBody className="justify-between gap-10 border-r-2 border-black-500 shadow-xl bg-white md:pt-32">
-        <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+        <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden scrollbar">
           {open ? (
             <div className="flex gap-2 items-center">
               <IconFilter className="flex-shrink-0" />
@@ -116,10 +115,10 @@ const ProductSidebar = ({ categories }: { categories: Category[] }) => {
           />
 
           <div className={cn("p-1 relative", open ? 'block' : 'hidden')}>
-            <div className="relative w-full">
-              <IconSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
+            <div className="relative w-full flex items-center mt-5">
+              <IconSearch className="absolute text-gray-500 left-3" />
               <Input
-                className="mt-5 rounded-full pl-12"
+                className="rounded-full pl-12"
                 placeholder="Search products..."
                 onChange={(e) => handleSearch(e)}
               />

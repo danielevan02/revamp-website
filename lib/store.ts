@@ -1,11 +1,13 @@
 import { create } from 'zustand'
 
-type Modal = {
-  isOpen: boolean
-  close: (newState:boolean) => void 
+type VariantPhoto = {
+  photo: string
+  setVariantPhoto: (varPhoto: string) => void
 }
 
-export const useModalState = create<Modal>((set) => ({
-  isOpen: false,
-  close: (newState) => set({isOpen: newState})
+export const useVariantPhoto = create<VariantPhoto>((set) => ({
+  photo: '',
+  setVariantPhoto: (varPhoto) => {
+    set({photo: varPhoto})
+  }
 }))

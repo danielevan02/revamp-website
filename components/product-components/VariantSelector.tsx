@@ -5,6 +5,7 @@ import React, { useMemo, useState } from "react";
 import { Badge } from "../ui/badge";
 import { isNumber } from "lodash";
 import { cn } from "@/lib/utils";
+import { useVariantPhoto } from "@/lib/store";
 
 interface VariantSelectorProps {
   discount: number;
@@ -27,13 +28,17 @@ const VariantSelector: React.FC<VariantSelectorProps> = ({ discount, variants, p
   const [selectedVariant, setSelectedVariant] = useState('')
   const discountedPrice = isNumber(price) && price-price*discount || undefined
 
-  const handleVariant = (id: string, price: number) => {
+  const setVariantPhoto = useVariantPhoto((state)=> state.setVariantPhoto)
+
+  const handleVariant = (id: string, price: number, photo?: string) => {
     if(selectedVariant === id) {
       setSelectedVariant('')
       setPrice(computedPrice)
+      setVariantPhoto('')
     } else {
       setSelectedVariant(id)
       setPrice(price)
+      setVariantPhoto(photo??'')
     }
   }
   return (
@@ -71,7 +76,7 @@ const VariantSelector: React.FC<VariantSelectorProps> = ({ discount, variants, p
                 selectedVariant === variant.id && 'bg-neutral-300 '
               )} 
               key={idx}
-              onClick={() => handleVariant(variant.id, variant.price)}
+              onClick={() => handleVariant(variant.id, variant.price, variant.photo ?? '')}
             >
               {variant.name}
             </div>

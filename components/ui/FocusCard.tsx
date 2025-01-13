@@ -26,7 +26,7 @@ export const Card = React.memo(
         hovered !== null && hovered !== index && "blur-sm scale-[0.98]"
       )}
       style={{
-        y: 50,
+        y: 20,
         opacity: 0,
       }}
     >
