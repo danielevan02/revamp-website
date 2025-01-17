@@ -32,7 +32,7 @@ export const TextGenerateEffect = ({
 
   const renderWords = () => {
     return (
-      <motion.div ref={scope}>
+      <motion.span ref={scope} className="flex flex-wrap gap-x-3 justify-center">
         {wordsArray.map((word, idx) => {
           return (
             <motion.span
@@ -46,16 +46,16 @@ export const TextGenerateEffect = ({
             </motion.span>
           );
         })}
-      </motion.div>
+      </motion.span>
     );
   };
 
   return (
     <div className={cn("font-extrabold", className)}>
       <div className="mt-4">
-        <div className="text-white text-4xl md:text-7xl tracking-wide max-w-[800px] text-center">
+        <h1 className="text-white text-3xl md:text-7xl tracking-wide max-w-[800px] text-center" aria-label="Breastfeeding Lifestyle Solution By GabaG Indonesia">
           {renderWords()}
-        </div>
+        </h1>
       </div>
     </div>
   );

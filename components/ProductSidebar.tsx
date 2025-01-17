@@ -1,6 +1,6 @@
 "use client";
 
-import { IconAdjustmentsSearch, IconFilter, IconSearch } from "@tabler/icons-react";
+import { IconFilter, IconSearch } from "@tabler/icons-react";
 import { SidebarBody, Sidebar } from "./ui/sidebar";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { Category } from "@prisma/client";
@@ -94,7 +94,7 @@ const ProductSidebar = ({ categories }: { categories: Category[] }) => {
   return (
     <Sidebar open={open} setOpen={setOpen}>
       <SidebarBody className="justify-between gap-10 border-r-2 border-black-500 shadow-xl bg-white md:pt-32">
-        <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden scrollbar">
+        <div className="flex relative flex-col flex-1 overflow-y-auto overflow-x-hidden scrollbar">
           {open ? (
             <div className="flex gap-2 items-center">
               <IconFilter className="flex-shrink-0" />
@@ -106,13 +106,7 @@ const ProductSidebar = ({ categories }: { categories: Category[] }) => {
             </div>
           )}
 
-          <IconAdjustmentsSearch
-            className={cn(
-              "absolute top-1/2 -translate-y-1/2 text-white rounded-lg bg-black/20 cursor-pointer",
-              open && "hidden"
-            )}
-            size={30}
-          />
+          <span className={cn("flex relative text-xl -rotate-90 top-1/2 -translate-y-1/2 uppercase", open && "hidden")}>Filter</span>
 
           <div className={cn("p-1 relative", open ? 'block' : 'hidden')}>
             <div className="relative w-full flex items-center mt-5">

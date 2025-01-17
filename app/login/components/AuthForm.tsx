@@ -14,7 +14,7 @@ import Link from "next/link";
 import {useMutation} from '@tanstack/react-query'
 import { createUser } from "@/app/action/product.action.ts/userAction";
 import toast from "react-hot-toast";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 interface AuthFormProps {
   type: 'login' | 'signup'
@@ -27,13 +27,15 @@ const AuthForm: React.FC<AuthFormProps> = ({type}) => {
   const {mutate, isPending} = useMutation({
     mutationFn: (data: signUpType) => createUser(data)
   })
+  const {status} = useSession()
   const [authType, setAuthType] = useState(type)
   const [passType, setPassType] = useState('password')
   const router = useRouter()
   const { 
     register, 
     handleSubmit,
-    formState: {errors}
+    formState: {errors},
+    reset
   } = useForm({
     defaultValues: {
       firstName: '',
@@ -41,7 +43,7 @@ const AuthForm: React.FC<AuthFormProps> = ({type}) => {
       password: "",
       confirmPass: "",
       address: "",
-      email: "",
+      username: "",
       phone: "",
     },
     resolver: zodResolver(signUpSchema),
@@ -52,15 +54,18 @@ const AuthForm: React.FC<AuthFormProps> = ({type}) => {
     handleSubmit: handleSubmitLogin
   } = useForm({
     defaultValues:{
-      email: '',
+      username: '',
       password:''
     },
     resolver: zodResolver(loginSchema)
   })
 
   useEffect(()=>{
+    if(status === 'authenticated'){
+      router.push('/product')
+    }
     router.replace(`/login?type=${authType}`)
-  }, [authType, router])
+  }, [authType, router, status])
 
 
   const onSubmit: SubmitHandler<LoginType | signUpType> = async (data) => {
@@ -70,8 +75,13 @@ const AuthForm: React.FC<AuthFormProps> = ({type}) => {
           data as signUpType, 
           {
             onSuccess: (res)=>{
-              if(res?.message)toast.success(res.message)
-              setAuthType('login')
+              if(res?.message){
+                toast.success(res.message)
+                if(!res.error) {
+                  setAuthType('login')
+                  reset()
+                }
+              }
             }
           }
         )
@@ -96,8 +106,7 @@ const AuthForm: React.FC<AuthFormProps> = ({type}) => {
     }
   };
   return (
-    <form 
-      className="mb-4" 
+    <form
       onSubmit={
         authType === 'signup'
         ? handleSubmit(onSubmit)
@@ -121,16 +130,16 @@ const AuthForm: React.FC<AuthFormProps> = ({type}) => {
           </LabelInputContainer>
         </div>
         <LabelInputContainer className="mb-4">
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email">Username</Label>
           <Input 
-            id="email" 
-            placeholder="projectmayhem@fc.com" 
-            type="email" 
+            id="username" 
+            placeholder="johndoe1232" 
+            type="text" 
             {...(authType === 'signup'
-              ? register('email')
-              : registerLogin('email')
+              ? register('username')
+              : registerLogin('username')
             )} 
-            errors={errors.email?.message} 
+            errors={errors.username?.message} 
             disabled={isPending} 
           />
         </LabelInputContainer>
@@ -170,6 +179,7 @@ const AuthForm: React.FC<AuthFormProps> = ({type}) => {
       >
         {authType === 'login' ? 'Login':'Sign Up'}
         <IconArrowRight size={15} className="opacity-0 group-hover/btn:opacity-100 -translate-x-2 group-hover/btn:translate-x-0 transition-all"/>
+        {isPending && <div className="border-2 border-t-2 rounded-full border-white border-t-blue-500 w-5 h-5 animate-spin"/>}
       </button>
 
       <div className="mt-3">

@@ -49,9 +49,10 @@ const Home = async () => {
           className="w-full h-full object-cover absolute"
           alt="main-banner"
           priority
+          
         />
         <div className="absolute w-full h-full bg-gradient-to-b opacity-80 from-blue-950 via-black"/>
-        <span className="text-white-200 uppercase text-center">Competitive Quality and Innovative Solutions.</span>
+        <h2 className="text-white uppercase text-center relative">Competitive Quality and Innovative Solutions.</h2>
         <TextGenerateEffect words="Breastfeeding Lifestyle Solution By GabaG Indonesia" duration={0.8} />
         <Link
           href="/product"
@@ -66,10 +67,10 @@ const Home = async () => {
           <ContainerScroll
             titleComponent={
               <>
-                <h1 className="text-4xl font-semibold text-black dark:text-white">
+                <h2 className="text-4xl font-semibold text-black dark:text-white">
                   Checkout our latest <br />
                   <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none">Promo and Offers 🔥</span>
-                </h1>
+                </h2>
               </>
             }
           >

@@ -8,6 +8,11 @@ import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import { ClassNameValue } from "tailwind-merge";
 import { cn } from "@/lib/utils";
+import { useSession } from "next-auth/react";
+import ProfileUser from "./ProfileUser";
+import { IconCurrencyCent, IconHeart } from "@tabler/icons-react";
+import IconGabagCoins from "@/lib/icons/IconGabagCoins";
+import ShoppingCart from "./ShoppingCart";
 
 const menuItems = [
   { name: "Products", href: "/product" },
@@ -16,20 +21,17 @@ const menuItems = [
   { name: "About Gabag", href: "/about" },
 ];
 
-const LoginButton = ({className}: {className?: ClassNameValue}) => (
+const LoginButton = ({ className }: { className?: ClassNameValue }) => (
   <Link
-    href='/login?type=login'
+    href="/login?type=login"
     className={`px-6 py-2 rounded-xl border flex justify-center items-center font-semibold border-black bg-white text-black text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200 ${className}`}
   >
     Login
   </Link>
 );
 
-const SignInButton = ({className}: {className?: ClassNameValue}) => (
-  <Link
-   className={cn("p-[3px] relative", className)}
-   href='/login?type=signup'
-  >
+const SignInButton = ({ className }: { className?: ClassNameValue }) => (
+  <Link className={cn("p-[3px] relative ", className)} href="/login?type=signup">
     <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-xl" />
     <div className="px-5 py-2  bg-black rounded-lg relative group transition duration-200 text-white hover:bg-transparent">
       Sign Up
@@ -38,12 +40,13 @@ const SignInButton = ({className}: {className?: ClassNameValue}) => (
 );
 
 export default function Navbar() {
+  const { data, status } = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const pathname = usePathname();
   const isLandingPage = useMemo(() => pathname === "/", [pathname]);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
-  const path = usePathname()
+  const path = usePathname();
 
   const handleScroll = useCallback(() => {
     const scrollPosition = window.scrollY;
@@ -86,7 +89,10 @@ export default function Navbar() {
     <AnimatePresence>
       {(isVisible || !isLandingPage) && (
         <motion.nav
-          className={cn("fixed top-0 left-0 right-0  bg-white md:bg-white/90 shadow-md z-[99] backdrop-blur-md", path === '/login' && 'hidden')}
+          className={cn(
+            "fixed top-0 left-0 right-0  bg-white md:bg-white/90 shadow-md z-[99] backdrop-blur-md",
+            path === "/login" && "hidden"
+          )}
           initial={isLandingPage ? { y: "-100%" } : { y: 0 }}
           animate={{ y: 0 }}
           exit={isLandingPage ? { y: "-100%" } : {}}
@@ -105,8 +111,9 @@ export default function Navbar() {
                   <motion.div key={item.name} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                     <Link
                       href={item.href}
-                      className={cn('text-gray-600 hover:text-primary px-3 py-2 uppercase text-sm rounded-md',
-                        path.startsWith(item.href) ? 'font-extrabold' : 'font-medium'
+                      className={cn(
+                        "text-gray-600 hover:text-primary px-3 py-2 uppercase text-sm rounded-md",
+                        path.startsWith(item.href) ? "font-extrabold" : "font-medium"
                       )}
                       aria-current={pathname === item.href ? "page" : undefined}
                     >
@@ -116,10 +123,31 @@ export default function Navbar() {
                 ))}
               </div>
               <div className="hidden lg:flex sm:items-center gap-3">
-                <LoginButton />
-                <SignInButton />
+                {data?.user ? (
+                  <div className="flex items-center gap-x-3">
+                    <div className="flex bg-neutral-100 items-center rounded-full pr-1 gap-x-2">
+                      <IconGabagCoins size={35} />
+                      <span>434.000</span>
+                      <IconCurrencyCent />
+                    </div>
+                    <div className="relative">
+                      <IconHeart className="w-8 h-8 text-neutral-600" stroke={1} />
+                      <div className="bg-red-400 text-white text-xs px-[3px] rounded-full absolute top-0 right-0">
+                        0
+                      </div>
+                    </div>
+                    <ShoppingCart/>
+                    <ProfileUser data={data} />
+                  </div>
+                ) : (
+                  <>
+                    <LoginButton />
+                    <SignInButton />
+                  </>
+                )}
               </div>
-              <div className="-mr-2 flex items-center lg:hidden">
+              <div className="-mr-2 flex gap-3 items-center lg:hidden">
+                <ShoppingCart/>
                 <button
                   onClick={() => setIsOpen(!isOpen)}
                   className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
@@ -147,8 +175,9 @@ export default function Navbar() {
                     <Link
                       key={item.name}
                       href={item.href}
-                      className={cn("text-gray-600 hover:text-primary block px-3 py-2 rounded-md text-base font-medium", 
-                        path.startsWith(item.href) && 'font-extrabold text-lg'
+                      className={cn(
+                        "text-gray-600 hover:text-primary block px-3 py-2 rounded-md text-base font-medium",
+                        path.startsWith(item.href) && "font-extrabold text-lg"
                       )}
                       aria-current={pathname === item.href ? "page" : undefined}
                       onClick={() => setIsOpen(false)}
@@ -158,10 +187,27 @@ export default function Navbar() {
                   ))}
                 </div>
                 <div className="pt-4 pb-3 border-t border-gray-200">
-                  <div className="flex items-center px-5 gap-3">
-                    <LoginButton className="relative w-full inline-flex h-12 overflow-hidden rounded-xl p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50" />
-                    <SignInButton className="h-12 w-full" />
-                  </div>
+                  {data?.user ? (
+                    <div className="flex items-center gap-x-3 justify-evenly">
+                      <div className="flex bg-neutral-100 items-center rounded-full pr-1 gap-x-2">
+                        <IconGabagCoins size={35} />
+                        <span>434.000</span>
+                        <IconCurrencyCent />
+                      </div>
+                      <div className="relative">
+                        <IconHeart className="w-8 h-8 text-neutral-600" stroke={1} />
+                        <div className="bg-red-400 text-white text-xs px-[3px] rounded-full absolute top-0 right-0">
+                          0
+                        </div>
+                      </div>
+                      <ProfileUser data={data} />
+                    </div>
+                  ) : (
+                    <div className="flex items-center px-5 gap-3">
+                      <LoginButton className="relative w-full inline-flex h-12 overflow-hidden rounded-xl p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50" />
+                      <SignInButton className="h-12 w-full" />
+                    </div>
+                  )}
                 </div>
               </motion.div>
             )}

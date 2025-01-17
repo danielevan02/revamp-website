@@ -6,9 +6,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
-import { Category, Product, Variant } from "@prisma/client";
 import ProductCard from "../ProductCard";
-import { ClassNameValue } from "tailwind-merge";
 import { CategoriesWithProduct } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -23,7 +21,7 @@ const FlashSaleSection: React.FC<FlashSaleSectionProps> = ({data, prevBtnStyle, 
   const products = data.products
   return (
     <div className="flex flex-col">
-      <h1 
+      <h2 
         className={
           cn(`relative 
               flex-col 
@@ -51,8 +49,8 @@ const FlashSaleSection: React.FC<FlashSaleSectionProps> = ({data, prevBtnStyle, 
               md:gap-8`
           )}
       >
-        <span>{title}</span>
-      </h1>
+        {title}
+      </h2>
       <Carousel className="w-full">
         <CarouselContent className="">
           {products.map((product) => (

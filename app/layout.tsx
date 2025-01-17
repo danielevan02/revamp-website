@@ -14,7 +14,8 @@ const inter = Outfit({
 
 export const metadata: Metadata = {
   title: "GabaG Indonesia - Perlengkapan Ibu Hamil dan Ibu Menyusui",
-  description: "Breastfeeding lifestyle solutions: Perlengkapan Ibu Menyusui dan Ibu Hamil",
+  description: "Gabag Indonesia - Tas ASI premium untuk ibu menyusui, dengan teknologi tahan dingin dan multifungsi. Temukan cooler bag berkualitas di sini!",
+  keywords: "ibu menyusui, asi, ibu hamil, tas asi, gabag indonesia, cooler bag, pompa asi"
 };
 
 export default function RootLayout({

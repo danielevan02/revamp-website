@@ -10,17 +10,17 @@ export const authOptions: AuthOptions = {
     CredentialsProvider({
       name: 'credentials',
       credentials: {
-        email: {label: 'Email', type: 'text'},
+        username: {label: 'Username', type: 'text'},
         password: {label: 'Password', type: 'password'},
       },
       async authorize(credentials) {
-        if(!credentials?.email || !credentials?.password){
+        if(!credentials?.username || !credentials?.password){
           throw new Error('Invalid Credentials')
         }
 
         const user = await prisma.user.findUnique({
           where: {
-            email: credentials.email
+            username: credentials.username
           }
         })
 
@@ -37,6 +37,15 @@ export const authOptions: AuthOptions = {
       },
     })
   ],
+  callbacks: {
+    session: ({ session, token }) => ({
+      ...session,
+      user: {
+        ...session.user,
+        id: token.sub
+      },
+    }),
+  },
   debug: process.env.NODE_ENV === 'development',
   session: {
     strategy: 'jwt',
